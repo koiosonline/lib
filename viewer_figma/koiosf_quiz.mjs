@@ -91,6 +91,7 @@ function QuizLeft() {
 	UpdateButtons() 
 	ScrQuizMadeVisible()
 }
+module.exports = QuizLeft;
 
 function QuizRight() {
 	console.log("QuizRight")
