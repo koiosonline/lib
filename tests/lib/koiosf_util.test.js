@@ -4,10 +4,10 @@
 // entire app, in webbrowser. web responses, like mouseclicks
 
 
-import { sleep } from '../../lib/koiosf_util.mjs';
+import { getElementVal } from '../../lib/koiosf_util.mjs';
 
-describe('loadScriptAsync', () => {
+describe('getElementVal', () => {
     test('', () => {
-        expect(sleep(1)).toBe('string');
+        expect(getElementVal('1', '2')).toBe('string');
     });
 });
