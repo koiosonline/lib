@@ -3,10 +3,11 @@
 // util module , lib
 // entire app, in webbrowser. web responses, like mouseclicks
 
-const  ShowButton  = import('../../lib/koiosf_util.mjs').ShowButton;
 
-describe('ShowButton', () => {
+import { sleep } from '../../lib/koiosf_util.mjs';
+
+describe('loadScriptAsync', () => {
     test('', () => {
-        expect(ShowButton()).toBe('string');
+        expect(sleep(1)).toBe('string');
     });
 });
