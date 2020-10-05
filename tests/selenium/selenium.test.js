@@ -2,20 +2,24 @@ const { Builder, By, Key, util } = require("selenium-webdriver");
 require('chromedriver');
 require("regenerator-runtime");
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 beforeAll(async () => {
     jest.setTimeout(20000);
 })
 
-describe('example', async () => {
+describe('example', () => {
     test('test example', async () => {
         
         const driver = await new Builder().forBrowser("chrome").build();    
         try {
-            await driver.get("https://www.duckduckgo.com");
-            await driver.findElement(By.name("q")).sendKeys("test", Key.RETURN);
-            let result = await (await driver.findElement(By.xpath("/html/body/div[2]/div[5]/div[3]/div/div[1]/div[5]/div[1]/div/div[1]/div/a/span[1]"))).getText();
+            await driver.get("https://www.koios.online/newviewer");
+            await sleep(3000);
+            let result = await driver.findElement(By.xpath("/html/body/div[2]/div[6]/div[1]/div[3]/div")).getText();
             
-            expect(result).toBe("https://www.speedtest.net");
+            expect(result).toBe("Login");
         } finally { 
             driver.close(); 
         }
