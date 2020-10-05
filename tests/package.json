@@ -11,6 +11,8 @@
   "dependencies": {
     "@babel/preset-env": "^7.11.5",
     "babel-jest": "^26.3.0",
-    "jest": "^26.4.2"
+    "chromedriver": "^85.0.1",
+    "jest": "^26.4.2",
+    "selenium-webdriver": "^4.0.0-alpha.7"
   }
 }
