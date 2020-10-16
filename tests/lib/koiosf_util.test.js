@@ -1,10 +1,7 @@
-/**
- * @jest-environment jsdom
- */
 
 import { getElement } from '../../lib/koiosf_util.mjs';
-import { getElementVal } from '../../lib/koiosf_util.mjs';
-import '@testing-library/jest-dom'
+import {getElementVal} from '../../lib/koiosf_util.mjs';
+import '@testing-library/jest-dom';
 
 // https://stackoverflow.com/questions/47902335/innertext-is-undefined-in-jest-test
 // https://github.com/jsdom/jsdom/issues/1245
