@@ -1,4 +1,4 @@
-name: Run Jest Action
+name: Tests
 
 on: [push]
 
@@ -17,5 +17,10 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: npm test
+    - name: Run npm install
+      run: npm install
+      working-directory: ./tests
+
+    - Name: Run npm test
+      run: npm test
+      working-directory: ./tests
