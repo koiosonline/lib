@@ -6,6 +6,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env: 
+      working-directory: ./tests
 
     strategy:
       matrix:
@@ -19,8 +21,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: Run npm install
       run: npm install
-      working-directory: ./tests
+      working-directory: ${{env.working-directory}}
 
     - name: Run npm test
-      run: npm test
-      working-directory: ./tests
+      run: npm gh-actions-test
+      working-directory: ${{env.working-directory}}
