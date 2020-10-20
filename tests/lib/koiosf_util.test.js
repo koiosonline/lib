@@ -72,6 +72,6 @@ describe('getElementVal', () => {
         <p class="domid2">domid2 domid2 domid2</p>
         </div>`;
 
-        expect(getElementVal('firstName')).toContain('testtt');
+        expect(getElementVal('firstName')).toContain('test');
     });
 });
