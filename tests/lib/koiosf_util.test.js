@@ -2,8 +2,6 @@
 import { getElement } from '../../lib/koiosf_util.mjs';
 import { getElementVal } from '../../lib/koiosf_util.mjs';
 
-// https://stackoverflow.com/questions/47902335/innertext-is-undefined-in-jest-test
-// https://github.com/jsdom/jsdom/issues/1245
 Object.defineProperty(global.Element.prototype, 'innerText', {
     get() {
         return this.textContent;
@@ -27,13 +25,13 @@ const mockBody = `
 
 const mockContent = `
 <div id="content">
-    <p class="firstName">    name   </p>
+    <p class="firstName">    first name   </p>
     <p class="lastName">last name</p>
 </div>`;
 
 
 describe('getElement', () => {
-    it('should getElement', () => {
+    it('should return the HTML element of the second paragraph in the footer as a string', () => {
         const expectedOutput = '<p id="id7" class="paragraph second-paragraph">this is the second paragraph of footer</p>';
         document.body.innerHTML = mockBody;
 
@@ -52,17 +50,17 @@ describe('getElementVal', () => {
 
     it('should return the content of paragraph with id "firstName" without any spaces / trimmed', () => {
         document.body.innerHTML = mockContent;
-        expect(getElementVal('firstName')).toBe('name');
+        expect(getElementVal('firstName')).toBe('first name');
     });
 
     it('should return the content of paragraph with class "firstName" without any spaces / trimmed', () => {
         document.body.innerHTML = mockContent;
-        expect(getElementVal('firstName')).toBe('name');
+        expect(getElementVal('firstName')).toBe('first name');
     });
 
     it('should not return the content of paragraph with class "firstName" with all the spaces', () => {
         document.body.innerHTML = mockContent;
-        expect(getElementVal('firstName')).not.toBe('    name   ');
+        expect(getElementVal('firstName')).not.toBe('    first name   ');
     });
 
     it('should return the content of the first paragraph with class "firstname" and contain "test"', () => {
