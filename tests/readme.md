@@ -4,7 +4,10 @@ time in the end. In this ReadMe we will explain how to start and run them.
 
 ## Table of Contents
 1. [Installation](#Installation)
-1. [Sources](#Sources)
+2. [Usage](#Usage)
+3. [Workflow](#Workflow)
+4. [Write a test](#Writeatest)
+5. [Sources](#Sources)
 
 
 ## Installation
