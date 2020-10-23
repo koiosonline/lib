@@ -1,11 +1,8 @@
 
-
-
-import {loadScriptAsync,getElement,GetImageIPFS,publish,setElementVal} from '../lib/koiosf_util.mjs';
+import {loadScriptAsync,getElement,GetImageIPFS,publish,setElementVal,subscribe} from '../lib/koiosf_util.mjs';
 import { } from "../lib/3box.js"; // from "https://unpkg.com/3box/dist/3box.js"; // prevent rate errors
 
 /*
-
 const infuraKey = "37a4c5643fe0470c944325f1e9e12d50";
 var providerOptions = {
 /*    walletconnect: {
@@ -16,7 +13,6 @@ var providerOptions = {
     }
     
 };
-
 */
 
 
@@ -24,6 +20,10 @@ let web3Modal     // Web3modal instance
 var  provider;  // Chosen wallet provider given by the dialog window
 let selectedAccount;     // Address of the selected account
 var web3;
+var globalprofilename
+var globalprofile
+var globalprofileimage
+
 
 var initpromise=init();
 
@@ -55,7 +55,7 @@ if (window.ethereum)
 window.addEventListener('DOMContentLoaded', asyncloaded);  // load  
  
 
-function ClearCachedProvider() {
+export function ClearCachedProvider() {
     web3Modal.clearCachedProvider();
 }
 
@@ -66,17 +66,18 @@ console.log("asyncloaded login")
 //console.log(getElement("login"))
 //console.log(getElement("login_comment"))
 
-    getElement("login","scr_profile").addEventListener('animatedclick',Login)    
-    getElement("login","scr_comment").addEventListener('animatedclick',Login)    
-    getElement("clearcachedprovider").addEventListener('animatedclick',ClearCachedProvider)        
+    var domid
+    domid=getElement("login","scr_profile");if (domid) domid.addEventListener('animatedclick',Login)    
+    domid=getElement("login","scr_comment");if (domid) domid.addEventListener('animatedclick',Login)    
+    domid=getElement("clearcachedprovider");if (domid) domid.addEventListener('animatedclick',ClearCachedProvider)        
 
-
-
-
-console.log("Setting name link to 3box");
-getElement("name").href="http://3box.io/hub"
-getElement("name").target="_blank"
-console.log(getElement("name"));
+    console.log("Setting name link to 3box");
+    domid=getElement("name")
+    if (domid) {
+        domid.href="http://3box.io/hub"
+        domid.target="_blank"
+        console.log(getElement("name"));
+    }
 
     console.log("login");
     await initpromise;
@@ -114,7 +115,7 @@ console.log(getElement("name"));
       };
       
       
-console.log("web3Modal");      
+    console.log("web3Modal");      
 
       web3Modal = new Web3Modal({
         cacheProvider: true, // remember previousely selected
@@ -122,11 +123,11 @@ console.log("web3Modal");
       });
 
 
-console.log(web3Modal);
+    console.log(web3Modal);
 
-if (web3Modal.cachedProvider) { // continue directly to save time later
-  await onConnect();   
-}
+    if (web3Modal.cachedProvider) { // continue directly to save time later
+      await onConnect();   
+    }
 
 
 }
@@ -143,9 +144,23 @@ export function getWeb3() {
 
 export function getUserAddress() {
  return  selectedAccount;
-
 }
 
+export function getProfileName() {
+ return  globalprofilename;
+}
+
+export async function getProfileForDid(did) {        
+    return  await Box.getProfile(did);
+}
+
+export function getProfile(did) {
+        return  globalprofile;
+}
+
+export function getProfileImage() {
+ return  globalprofileimage;
+}
 
 
 
@@ -178,7 +193,7 @@ async function fetchAccountData() {
      chainData = (await EvmChains.getChain(chainId)).name;    
   } catch(err) { console.log(err); } // but still continue
   
-  getElement("chain").textContent = chainData;
+  var domid=getElement("chain");if (domid) domid.textContent = chainData;
   
 
   // Get list of accounts of the connected wallet
@@ -188,21 +203,30 @@ async function fetchAccountData() {
   console.log("Got accounts", accounts);
   selectedAccount = accounts[0];
 
-  getElement("account").textContent = selectedAccount;
+  var domid=getElement("account");if (domid) domid.textContent = selectedAccount;
 
 
 // Read profile data
 const profile = await Box.getProfile(selectedAccount)
 console.log(profile)
+globalprofile=profile
+globalprofilename="No name defined yet on 3box"
+globalprofileimage=undefined;
 if (profile) {
-    getElement("name").textContent = `${profile.name?profile.name:"No name defined yet on 3box"} ${profile.emoji?profile.emoji:""}`
+    if (profile.name) globalprofilename=profile.name
+    if (profile.emoji) globalprofilename+=" "+profile.emoji
+    
+    var domid=getElement("name"); if (domid) domid.textContent = globalprofilename
     if (profile.image) {
         var imagecid=profile.image[0].contentUrl
         imagecid=imagecid[`\/`]
         console.log(imagecid);
-        getElement("userphoto ").src=await GetImageIPFS(imagecid)
+        globalprofileimage=await GetImageIPFS(imagecid)
+        var domid=getElement("userphoto"); if (domid) domid.src=globalprofileimage
     }
 }    
+
+
 
   // Get a handl
  //const template = document.querySelector("#template-balance");
@@ -281,15 +305,17 @@ async function onConnect() {
   } catch(e) {
     console.log("Could not get a wallet connection", e);
     setElementVal("status1","Not connected","scr_comment")
-    getElement("login","scr_comment").dispatchEvent(new CustomEvent("show"));
-    getElement("login","scr_profile").dispatchEvent(new CustomEvent("show"));
+    
+    var domid;
+    domid=getElement("login","scr_comment"); if (domid) domid.dispatchEvent(new CustomEvent("show"));
+    domid=getElement("login","scr_profile"); if (domid) domid.dispatchEvent(new CustomEvent("show"));
     if (web3Modal)
         web3Modal.clearCachedProvider(); // clear cached because this didn't work (try again later)
     return;
   }
   setElementVal("status1","Connected","scr_comment")
-  getElement("login","scr_comment").dispatchEvent(new CustomEvent("hide"));
-  getElement("login","scr_profile").dispatchEvent(new CustomEvent("hide"));
+  domid=getElement("login","scr_comment"); if (domid) domid.dispatchEvent(new CustomEvent("hide"));
+  domid=getElement("login","scr_profile"); if (domid) domid.dispatchEvent(new CustomEvent("hide"));
   
   
   
@@ -297,20 +323,20 @@ async function onConnect() {
   // Subscribe to accounts change
   
   try {
-      provider.on("accountsChanged", (accounts) => {
-        fetchAccountData();
+      provider.on("accountsChanged", async (accounts) => {
+        await fetchAccountData();
 		publish("ethereumchanged")
       });
 
       // Subscribe to chainId change
-      provider.on("chainChanged", (chainId) => {
-        fetchAccountData();
+      provider.on("chainChanged", async (chainId) => {
+        await fetchAccountData();
 		publish("ethereumchanged")
       });
 
       // Subscribe to networkId change
-      provider.on("networkChanged", (networkId) => {
-        fetchAccountData();
+      provider.on("networkChanged", async (networkId) => {
+        await fetchAccountData();
 		publish("ethereumchanged")
       });
   } catch(e) {
@@ -330,6 +356,48 @@ async function onConnect() {
 console.log(provider);
   
 }
+
+
+let box;
+
+
+subscribe("web3providerfound",NextStep)
+
+var init3boxpromise;
+
+async function NextStep() {
+    init3boxpromise=Init3box();  
+    console.log(init3boxpromise);
+}     
+
+async function Init3box() {
+    console.log("Init3box");
+    var ga=getUserAddress()
+    var pr=getWeb3Provider()
+    console.log(ga)
+    console.log(pr);
+    console.log("Start openbox")
+    console.log(Box);
+    box = await Box.openBox(ga,pr);    
+    console.log("after openbox");
+   // await box.syncDone
+    console.log("after syncdone");
+    console.log(box);
+    
+}
+
+export async function getBox() {
+    console.log('In getBox');
+     await authorize()
+    console.log(init3boxpromise);
+    await init3boxpromise;
+    
+    const verifiedAccounts = await Box.getVerifiedAccounts(getUserAddress())
+console.log(verifiedAccounts)
+    
+    return box;
+}    
+
 
 /**
  * Disconnect wallet button pressed.
@@ -356,9 +424,3 @@ async function onDisconnect() {
  // document.querySelector("#prepare").style.display = "block";
   //document.querySelector("#connected").style.display = "none";
 }
-
-
-    
- 
-
- 
