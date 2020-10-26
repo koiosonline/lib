@@ -37,7 +37,7 @@ async function getBadges() {
 }
 
 function StudentBadgeName() {
-	var currentcourse= GlobalCourseList.GetCurrentCourse()
+	var currentcourse = GlobalCourseList.GetCurrentCourse()
 	return "Student-"+currentcourse
 }
 
