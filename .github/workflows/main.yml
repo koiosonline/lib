@@ -14,9 +14,12 @@ jobs:
     container:
       image: node:14.4
       options: --network-alias testHost
-      
+
     env:
       working-directory: ./tests
+      NODE_ENV: test
+      SELENIUM_HUB_HOST: hub
+      TEST_HOST: testHost
 
     services:
       hub:
