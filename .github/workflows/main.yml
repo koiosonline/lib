@@ -11,24 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: node:14.4
-      options: --network-alias testHost
 
     env:
       working-directory: ./tests
-      NODE_ENV: test
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
-
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-firefox:3.141.59-gold
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444
 
     strategy:
       matrix:
@@ -47,3 +32,12 @@ jobs:
       - name: Run npm test
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
+
+      - uses: actions/checkout@master
+      - uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: '77.0.3865.40'
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
