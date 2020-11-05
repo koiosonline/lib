@@ -1,6 +1,6 @@
 name: Tests
 
-on: 
+on:
   push:
     branches:
       - master
@@ -10,25 +10,33 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    env: 
+    env:
       working-directory: ./tests
+
+    services:
+      hub:
+        image: selenium/hub:3.141.59-gold
+      firefox:
+        image: selenium/node-firefox:3.141.59-gold
+        env:
+          HUB_HOST: hub
+          HUB_PORT: 4444
 
     strategy:
       matrix:
         node-version: [10.x, 12.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: Run npm install
-      run: npm install
-      working-directory: ${{env.working-directory}}
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run npm install
+        run: npm install
+        working-directory: ${{env.working-directory}}
 
-    - name: Run npm test
-      run: npm run gh-actions-test
-      working-directory: ${{env.working-directory}}
+      - name: Run npm test
+        run: npm run gh-actions-test
+        working-directory: ${{env.working-directory}}
