@@ -4,4 +4,5 @@ module.exports = {
     "^.+\\.jsx?$": "babel-jest",
     "^.+\\.mjs$": "babel-jest",
   }
+  
 }
