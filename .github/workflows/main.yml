@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     env:
       working-directory: ./tests
@@ -34,18 +34,6 @@ jobs:
       - name: Run npm test
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
+        BROWSER: chrome
 
-  e2e-chrome:
-    runs-on: windows-latest
-    
-    env:
-      working-directory: ./tests
-      BROWSER: chrome
-
-    steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: npm install
-      - run: npm test
+ 
