@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     env:
       working-directory: ./tests
@@ -35,5 +35,3 @@ jobs:
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
         BROWSER: chrome
-
- 
