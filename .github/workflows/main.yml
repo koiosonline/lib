@@ -11,23 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: node:14.4
-      options: --network-alias https://www.koios.online/newviewer
 
     env:
       working-directory: ./tests
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: https://www.koios.online/newviewer
-
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-firefox:3.141.59-gold
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444 
 
     strategy:
       matrix:
@@ -49,3 +35,14 @@ jobs:
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
 
+  e2e-chrome:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm install
+      - run: npm test
+        env:
+          BROWSER: chrome
