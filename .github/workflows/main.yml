@@ -34,4 +34,3 @@ jobs:
       - name: Run npm test
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
-        BROWSER: chrome
