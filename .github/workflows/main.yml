@@ -20,6 +20,15 @@ jobs:
         node-version: [10.x, 12.x]
 
     steps:
+      - uses: actions/checkout@master
+      - uses: nanasess/setup-chromedriver@master
+        with:
+          chromedriver-version: '77.0.3865.40'
+      - run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+          
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -32,12 +41,3 @@ jobs:
       - name: Run npm test
         run: npm run gh-actions-test
         working-directory: ${{env.working-directory}}
-
-      - uses: actions/checkout@master
-      - uses: nanasess/setup-chromedriver@master
-        with:
-          chromedriver-version: '77.0.3865.40'
-      - run: |
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
