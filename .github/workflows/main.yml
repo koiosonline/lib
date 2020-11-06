@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: node:14.4
-      options: --network-alias https://www.koios.online/newviewer"
+      options: --network-alias https://www.koios.online/newviewer
 
     env:
       working-directory: ./tests
       SELENIUM_HUB_HOST: hub
-      TEST_HOST: https://www.koios.online/newviewer"
+      TEST_HOST: https://www.koios.online/newviewer
 
     services:
       hub:
