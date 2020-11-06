@@ -37,6 +37,11 @@ jobs:
 
   e2e-chrome:
     runs-on: windows-latest
+    
+    env:
+      working-directory: ./tests
+      BROWSER: chrome
+
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -44,6 +49,3 @@ jobs:
           node-version: 12
       - run: npm install
       - run: npm test
-        env:
-          working-directory: ./tests
-          BROWSER: chrome
