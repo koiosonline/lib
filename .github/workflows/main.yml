@@ -12,19 +12,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      working-directory: ./tests
-      SELENIUM_HUB_HOST: hub
-      TEST_HOST: testHost
-
-    services:
-      hub:
-        image: selenium/hub:3.141.59-gold
-      firefox:
-        image: selenium/node-firefox:3.141.59-gold
-        env:
-          HUB_HOST: hub
-          HUB_PORT: 4444 
+    
 
     strategy:
       matrix:
@@ -38,7 +26,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-          
+
       - name: Run npm install
         run: npm install
         working-directory: ${{env.working-directory}}
