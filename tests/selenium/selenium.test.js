@@ -23,7 +23,7 @@ describe('dashboard', () => {
         const height = 480;
 
         const driver = await new Builder()
-            .forBrowser(qawesed)
+            .forBrowser('qawesed')
             .withCapabilities(chromeCapabilities)
             // .setChromeOptions(
             //     new chrome.Options().headless().windowSize({width, height}))
