@@ -17,13 +17,13 @@ describe('dashboard', () => {
 
 
         const chromeCapabilities = webdriver.Capabilities.chrome();
-        chromeCapabilities.set('chromeOptions', { args: ['--headless'] });
+        chromeCapabilities.set('chromeOptions', { args: ["--headless", "--disable-gpu", "window-size=1366x768"] });
 
         const width = 640;
         const height = 480;
 
         const driver = await new Builder()
-            .forBrowser("chrome")
+            .forBrowser('chrome')
             .withCapabilities(chromeCapabilities)
             // .setChromeOptions(
             //     new chrome.Options().headless().windowSize({width, height}))
