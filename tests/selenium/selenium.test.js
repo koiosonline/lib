@@ -18,16 +18,15 @@ describe('dashboard', () => {
 
 
         const chromeCapabilities = webdriver.Capabilities.chrome();
-        chromeCapabilities.set('chromeOptions', { args: ['--headless', '--no-sandbox', '--disable-gpu', 'window-size=1366x768', '--remote-debugging-port=9222', '--remote-debugging-address=0.0.0.0', '--disable-dev-shm-usage'] });
+        chromeCapabilities.set('chromeOptions', { args: ['--headless', '--no-sandbox', '--disable-gpu', 'window-size=640x480', '--remote-debugging-port=9222', '--remote-debugging-address=0.0.0.0', '--disable-dev-shm-usage'] });
 
-        const width = 640;
-        const height = 480;
+    
 
         const driver = await new Builder()
             .forBrowser('chrome')
-            .withCapabilities(chromeCapabilities)
-            // .setChromeOptions(
-            //     new chrome.Options().headless().windowSize({width, height}))
+            // .withCapabilities(chromeCapabilities)
+            .setChromeOptions(
+                new chrome.Options().headless())
             .build();
         try {
             await driver.get("https://www.koios.online/newviewer");
