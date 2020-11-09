@@ -2,7 +2,6 @@
 const { Builder, By, Key, util } = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
 let chrome = require('selenium-webdriver/chrome');
-// const chromedriver = require('chromedriver');
 require("regenerator-runtime");
 
 function sleep(ms) {
@@ -15,19 +14,12 @@ beforeAll(async () => {
 
 describe('dashboard', () => {
     test('go button exists', async () => {
-
-
-        const chromeCapabilities = webdriver.Capabilities.chrome();
-        chromeCapabilities.set('chromeOptions', { args: ['--headless', '--no-sandbox', '--disable-gpu', 'window-size=640x480', '--remote-debugging-port=9222', '--remote-debugging-address=0.0.0.0', '--disable-dev-shm-usage'] });
-
-    
-
-        const driver = await new Builder()
+        let driver = await new Builder()
             .forBrowser('chrome')
-            // .withCapabilities(chromeCapabilities)
-            .setChromeOptions(
-                new chrome.Options().headless())
+            .setChromeOptions(new chrome.Options().headless())
             .build();
+
+
         try {
             await driver.get("https://www.koios.online/newviewer");
             await sleep(10000);
@@ -38,20 +30,26 @@ describe('dashboard', () => {
             driver.close();
         }
     });
-    // test('go button click', async () => {
 
-    //     const driver = await new Builder().forBrowser("chrome").build();
-    //     try {
-    //         await driver.get("https://www.koios.online/newviewer");
-    //         await sleep(10000);
-    //         await driver.findElement(By.xpath("/html/body/div[2]/div[9]/div[3]/div/div[1]/div[3]/div")).click();
+    test('go button click', async () => {
+        let driver = await new Builder()
+        .forBrowser('chrome')
+        .setChromeOptions(new chrome.Options().headless())
+        .build();
+    
 
-    //         let result = await driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[5]/div/div[1]/div/div[1]/img[2]")).getAttribute("data-src");
-    //         expect(result).toBe("https://ipfs.io/ipfs/QmdFjFiaKaFCw5ocioFXHWGrFoZFTCk94oVobpxUrWP5Wv");
-    //     } finally {
-    //         driver.close();
-    //     }
-    // });
+        try {
+            await driver.get("https://www.koios.online/newviewer");
+            await sleep(10000);
+            await driver.findElement(By.xpath("/html/body/div[2]/div[9]/div[3]/div/div[1]/div[3]/div")).click();
+
+            let result = await driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[5]/div/div[1]/div/div[1]/img[2]")).getAttribute("data-src");
+            expect(result).toBe("https://ipfs.io/ipfs/QmdFjFiaKaFCw5ocioFXHWGrFoZFTCk94oVobpxUrWP5Wv");
+        } finally {
+            driver.close();
+        }
+    });
+
     // test('settings button click', async () => {
 
     //     const driver = await new Builder().forBrowser("chrome").build();
