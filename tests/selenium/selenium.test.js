@@ -1,7 +1,7 @@
 
 const { Builder, By, Key, util } = require("selenium-webdriver");
-const webdriver = require('selenium-webdriver');
 let chrome = require('selenium-webdriver/chrome');
+require('chromedriver');
 require("regenerator-runtime");
 
 function sleep(ms) {
