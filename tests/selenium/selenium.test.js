@@ -25,9 +25,9 @@ describe('dashboard', () => {
 
         const driver = await new Builder()
             .forBrowser('chrome')
-            // .withCapabilities(chromeCapabilities)
-            .setChromeOptions(
-                new chrome.Options().headless().windowSize({width, height}))
+            .withCapabilities(chromeCapabilities)
+            // .setChromeOptions(
+            //     new chrome.Options().headless().windowSize({width, height}))
             .build();
         try {
             await driver.get("https://www.koios.online/newviewer");
