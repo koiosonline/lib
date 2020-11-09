@@ -1,7 +1,8 @@
 
 const { Builder, By, Key, util } = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
-const chromedriver = require('chromedriver');
+let chrome = require('selenium-webdriver/chrome');
+// const chromedriver = require('chromedriver');
 require("regenerator-runtime");
 
 function sleep(ms) {
@@ -23,10 +24,10 @@ describe('dashboard', () => {
         const height = 480;
 
         const driver = await new Builder()
-            .forBrowser('qawesed')
-            .withCapabilities(chromeCapabilities)
-            // .setChromeOptions(
-            //     new chrome.Options().headless().windowSize({width, height}))
+            .forBrowser('chrome')
+            // .withCapabilities(chromeCapabilities)
+            .setChromeOptions(
+                new chrome.Options().headless().windowSize({width, height}))
             .build();
         try {
             await driver.get("https://www.koios.online/newviewer");
