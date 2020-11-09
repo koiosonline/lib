@@ -1,4 +1,4 @@
-const fs = require('fs');
+
 const { Builder, By, Key, util } = require("selenium-webdriver");
 const webdriver = require('selenium-webdriver');
 const chromedriver = require('chromedriver');
@@ -23,7 +23,7 @@ describe('dashboard', () => {
         const height = 480;
 
         const driver = await new Builder()
-            .forBrowser(chromedriver)
+            .forBrowser(qawesed)
             .withCapabilities(chromeCapabilities)
             // .setChromeOptions(
             //     new chrome.Options().headless().windowSize({width, height}))
