@@ -2,6 +2,7 @@ const { Builder, By, Key, util } = require("selenium-webdriver");
 require('chromedriver');
 require("regenerator-runtime");
 
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -12,8 +13,16 @@ beforeAll(async () => {
 
 describe('dashboard', () => {
     test('go button exists', async () => {
-        
-        const driver = await new Builder().forBrowser("chrome").build();    
+        var selenium = require('selenium-webdriver');
+
+var capabilities = selenium.Capabilities.chrome();
+
+capabilities.set('chromeOptions',{
+
+'args': ['--headless', '--no-sandbox', 'window-size=1024,768' , '--disable-gpu']
+
+})
+        const driver = await new Builder().forBrowser("chrome").withCapabilities(capabilities).build();    
         try {
             await driver.get("https://www.koios.online/newviewer");
             await sleep(10000);
