@@ -1,0 +1,111 @@
+Version V0.91
+Functional updates:
+ 
+ 
+Technical updates:
+- fixed warning
+- retrieve my details after account switch
+
+Layout updates:
+- search screen updated
+
+Version V0.9
+Functional updates:
+- free text
+ 
+Technical updates:
+- minor bugfixes
+- timing issue in koiosf_login
+- 3box box not loaded in koiosf_login
+- fixed timeing issue with starting UpdateRecordList twice
+
+Layout updates:
+- job => oppertunity
+- buttons two "swipe" left & right
+
+
+Version V0.08
+Functional updates:
+- add mail
+- add browse
+
+Technical updates:
+- fixed lots of details
+
+Layout updates:
+- 
+
+
+Version V0.07
+Functional updates:
+- implemented more screens
+
+Technical updates:
+- more complex struct stored on orbitdb
+
+Layout updates:
+- images, colours and
+
+
+Version V0.06
+Functional updates:
+- improved the addjob/addlisting
+- fields configurable via json file
+
+Technical updates:
+- fix high load on system (by preventing preload, which seemed to go on for ever)
+- updated to ipfs 0.50.2
+
+Layout updates:
+- removed video from card
+
+
+Version V0.05
+Functional updates:
+
+
+Technical updates:
+- html converter updated to support 2d grids better
+
+Layout updates:
+- 2d grid for cards
+- 2d grid for sdgs  (also smaller icons)
+
+
+Version V0.04
+Functional updates:
+- connected to 3box
+- integrated my details (from both student & company)
+
+Technical updates:
+- updated koiosf_login to suppress error message
+
+Layout updates:
+- my details retrieved from 3box
+- added more screen
+
+
+Version V0.03
+Functional updates:
+
+Technical updates:
+
+
+Layout updates:
+- added more fields
+- added more screen
+
+
+
+Version V0.02
+Functional updates:
+
+Technical updates:
+- updated to latest version of html converter
+- put on github
+- linked to koios.online/sync
+- larger list of beroepsproducten
+
+Layout updates:
+
+

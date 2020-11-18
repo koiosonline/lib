@@ -54,7 +54,7 @@
 		"start": "31-8-2020",
 		"image": "https://ipfs.io/ipfs/QmcR3DR5wZWBUaJzpbkhV7Nspne1dJ75P4eHzXrtgbniRE",
 		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-glxugcib-ZJCMueimSPN3svG45gG0Xw"                
+		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"                
 	},	
 	"bclevel02": {
 		"course": "Mastering Blockchain",
@@ -71,22 +71,24 @@
 		"start": "31-8-2020",
 		"image": "https://ipfs.io/ipfs/QmYPt618XA9KHnLsfTwXPBsgvt8YJi8Tp4amysDUVCg1zn",
 		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-glxugcib-ZJCMueimSPN3svG45gG0Xw"                
+		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ",
+		"token": "Titan"
 	},    
 	"bclevel03": {
 		"course": "Mastering Blockchain",
 		"courselevel": "Blockchain Level 3",
 		"level": "3",
-		"videoinfo": "QmNNR2C5GZRZijezBTocjwzkkCxpZRW6TEV23E8dvGfD7z",
-		"duration": "30969",
-		"slides": "QmNcvkvjyq4cDRB4CidU6EExfX5bYCsM9B9mMygwWVwXhi",
-		"contributer": "jordi",
+     "videoinfo": "QmPMMaPkekVioCSPHmERYpJ7EdcUZGdSUNm5yGJEmouRji",
+     "duration": "36072",
+		"slides": "QmNyDU4KauqoXQSHQphcbP8M6rsmaZcP5JEssRSULuw7Eg",
+        "quizinfo": "QmaTadUToxc7rXBxJQ4FDp51y5o4bdnSmNju28vdZLfWMT",
+		"contributer": "Jordi",
 		"subtitle": "The intermediate level. This is where things get serious.",
 		"description": "Welcome to the third part of the KOIOS Blockchain Technology course. This is the so called 'economic deep dive', where we will focus on economics in relation to Blockchain Technology.",
 		"goal": "More advanced blockchain stuff",
 		"image": "https://ipfs.io/ipfs/QmfAh2yJyHN9pPP93Sm58QrqSnVsw2MyVXQz6vCcgZRZzU",
 		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-glxugcib-ZJCMueimSPN3svG45gG0Xw"                
+		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"		
 	},
 	"datascience01": {
 		"course": "Datascience & Python",
@@ -114,11 +116,29 @@
 		"goal": "TBA",
 		"start": "Soon",
 		"image": "https://ipfs.io/ipfs/QmVrj8SJC6YKdb6X6g4tdUVzT6x9oRMenr6Rv2s1TLPDcX",
-		"videoinfo": "QmbqgxGVFuMGGwuLqSMRsU2podejxZyoSVMcQSYLj5Ht6S",
-		"duration": "7457",
+        "videoinfo": "QmXsW86Hr9Y1R9s6NwdkKACraaAxxdwCzMVkYMddaNsLtQ",
+        "duration": "10425",
 		"slides": "QmagLJr432F86K6YEy4yzWHb499cdsyAyyE1jrVn1ctHvN",				
 		"quizinfo": "QmSYWwA3Arn4rm7vQYBTYpCTx3CiM84ipg9BozNyES8tCv",
 		"community":"https://koiosonline.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosonline/shared_invite/enQtNjE0MjAyNzMyODY4LTFlYWIzODRkNTI2ZWExOWM0NGNmMjFjNTU1YzFmZGExOWUzY2EzYTg4NDMwNDVhOTBkMGU0MTFkNzJkN2I5MWM"                
-	}    			
+		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"                
+	},
+	"programmingdapps01": {   
+		"course": "Programming DAPPS",
+		"courselevel": "Programming DAPPS",
+		"level": "3",		
+     "videoinfo": "QmYqfE4DMTgMHWNjtJm9ir8WHqdbXJuSLYsdhoPd2Nzazs",
+     "duration": "13419",
+		"slides": "QmPBGiMtDMGSCaCM7zenP1cgvFvtmAtvCKdDkzLUgGzAPp",
+        "quizinfo": "",
+		"contributer": "Gerard Persoon",
+		"subtitle": "Ethereum & solidity",
+		"description": "With this course you can learn programming the Ethereum blockchain with the programming language Solidity",
+		"goal": "Solidity IPFS",
+		"start": "now",
+		"image": "http://web3examples.com/logo.png",        
+		"community":"https://koiosblockcha-ma69869.slack.com",
+		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"
+		
+	}
 }

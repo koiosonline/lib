@@ -856,6 +856,7 @@ async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,button
         var dimensions=""
         var objecttype="div" // standard type
         var strhref=""
+        var strtarget=GetAtParam(figdata,"@target");
         var urllocation=""
         var insdata=""
         var transform=""
@@ -998,10 +999,12 @@ console.log(dimensions)
 				if (fthisisabutton && !fstaticwidth) {
 					width=undefined; // let the button create its width automatically
 				}
+                
+                
 				
                  if (fpartofflex) {
                     // console.log(width,height,left,right,bottom,top,paddingbottom)
-                    if (figdata.type=="TEXT") {
+                    if (figdata.type=="TEXT")  {  // ??&& !fstaticwidth
                         width=undefined; 
                         height=undefined;
                     }                
@@ -1092,6 +1095,29 @@ console.log(dimensions)
                     }
                 }
                 
+         if (fgrid)
+            display="inline-grid"
+        if (gridcols)
+            strstyle +=`grid-template-columns: repeat(${gridcols}, 1fr);`
+        if (gridrows)
+            strstyle +=`grid-template-rows: repeat(${gridrows}, 1fr);`                
+        
+        if (gridcols || gridrows) {
+            dimensions="";
+            fflex=""
+            //dimensions+="flex-direction: column;";
+            // dimensions +="flex-direction: row;";
+            fflex+=`margin-bottom: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`;
+            fflex+=`margin-right: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`;             
+            dimensions +=`padding-top:    ${figdata.verticalPadding?figdata.verticalPadding:0}px; `
+            dimensions +=`padding-bottom: ${(figdata.verticalPadding?figdata.verticalPadding:0)-(figdata.itemSpacing?figdata.itemSpacing:0)}px; `
+            dimensions +=`padding-left:   ${figdata.horizontalPadding?figdata.horizontalPadding:0}px; `
+            dimensions +=`padding-right:  ${(figdata.horizontalPadding?figdata.horizontalPadding:0)-(figdata.itemSpacing?figdata.itemSpacing:0)}px; `
+        }
+  
+        if (gridcol) strstyle +=`grid-column-start: ${gridcol};grid-col-end: span 1;`
+        if (gridrow) strstyle +=`grid-row-start: ${gridrow};grid-row-end: span 1;`
+        
                 
                 if (GetAtParam(figdata,"@width")) width=GetAtParam(figdata,"@width") // allways override if present
                 if (GetAtParam(figdata,"@height")) height=GetAtParam(figdata,"@height")
@@ -1113,16 +1139,7 @@ console.log(dimensions)
             }
         }    
                 
-        if (fgrid)
-            display="grid"
-        if (gridcols)
-            strstyle +=`grid-template-columns: repeat(${gridcols}, 1fr);`
-        if (gridrows)
-            strstyle +=`grid-template-rows: repeat(${gridrows}, 1fr);`                
-  
-        if (gridcol) strstyle +=`grid-column-start: ${gridcol};grid-col-end: span 1;`
-        if (gridrow) strstyle +=`grid-row-start: ${gridrow};grid-row-end: span 1;`
-        
+       
   
         
         if (figdata.clipsContent==true) strstyle +="overflow: hidden;"
@@ -1223,7 +1240,8 @@ function ConvertColor(color) {
         
         switch (figdata.type) {
            case "TEXT": strtxt+=figdata.characters.replace(/\n/g,"<br>"); // replace all newlines
-           
+                console.log(figdata.style)
+                console.log(strstyle);
                 switch(figdata.style.textAlignVertical) {
                    case "TOP":   break // is already default // display="flex";strstyle +="align-items: flex-start;";
                    case "CENTER": display="flex";strstyle +="align-items: center;";    break
@@ -1234,7 +1252,7 @@ function ConvertColor(color) {
                    case "CENTER": /*display="flex";*/strstyle +="text-align: center;"; break; // "justify-content: center;";    break;
                    case "RIGHT":  /*display="flex";*/strstyle +="text-align: right;"; break;  // "justify-content: flex-end;";  break;
                 }    
-                // console.log(strstyle);
+                 console.log(strstyle);
            break;
            //case "RECTANGLE": { console.log(figdata);                          break; }
          //  case "GROUP": strstyle +=`position: relative; display:inline-block;`; break;
@@ -1267,6 +1285,13 @@ function ConvertColor(color) {
         
         if (figdata.rectangleCornerRadii) {
             let r=figdata.rectangleCornerRadii;
+            strstyle +=`border-radius: ${r[0]}px ${r[1]}px ${r[2]}px ${r[3]}px;`; // (first value applies to top-left corner, second value applies to top-right corner, third value applies to bottom-right corner, and fourth value applies to bottom-left corner)
+        }
+        
+
+
+        if (figdata.cornerRadius) {
+            let r=figdata.cornerRadius;
             strstyle +=`border-radius: ${r[0]}px ${r[1]}px ${r[2]}px ${r[3]}px;`; // (first value applies to top-left corner, second value applies to top-right corner, third value applies to bottom-right corner, and fourth value applies to bottom-left corner)
         }
         
@@ -1313,8 +1338,12 @@ function ConvertColor(color) {
         
         
         if (dest) {
-            insdata=`data-dest="${encodeURIComponent(dest)}"`
+            insdata+=`data-dest="${encodeURIComponent(dest)}" `
           //  console.log(`insdata : ${insdata}`);
+        }
+        if (strtarget) {
+            insdata+=`data-target="${strtarget}" `
+              console.log(`insdata : ${insdata}`);
         }
         
         if (onclick) {
@@ -1379,7 +1408,7 @@ function ConvertColor(color) {
                 break;
             
                 case "a":  strhref=`href="{urllocation}" `;
-                case "div": htmlobjects.push(`<${objecttype} class="${classname}" ${insrtstyle} ${insdata} ${strhref} ">${strtxt}\n`) //  ${figdata.type} // title="${figdata.name}
+                case "div": htmlobjects.push(`<${objecttype} class="${classname}" ${insrtstyle} ${insdata} ${strhref}">${strtxt}\n`) //  ${figdata.type} // title="${figdata.name}
                             break;
         }
 
