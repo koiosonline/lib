@@ -11,7 +11,10 @@ export async function setupIPFS()
 {
   console.log("In SetupIPFS");
   await Promise.all([ // see https://www.npmjs.com/package/ipfs
-    loadScriptAsync("https://bundle.run/buffer"), // https://packd.now.sh/buffer
+    //loadScriptAsync("https://bundle.run/buffer"), // https://packd.now.sh/buffer
+    
+    loadScriptAsync("../lib/buffer/buffer6.0.2.js"), // https://packd.now.sh/buffer
+    
     //loadScriptAsync("https://unpkg.com/ipfs/dist/index.min.js"),
       loadScriptAsync("https://unpkg.com/ipfs-http-client/dist/index.min.js")
   ]);
