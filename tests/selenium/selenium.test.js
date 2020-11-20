@@ -1,3 +1,5 @@
+// https://developers.google.com/web/updates/2017/04/headless-chrome
+// https://www.selenium.dev/selenium/docs/api/javascript/module/selenium-webdriver/chrome.html
 
 const { Builder, By, Key, util } = require("selenium-webdriver");
 let chrome = require('selenium-webdriver/chrome');
