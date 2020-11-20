@@ -38,15 +38,14 @@ describe('dashboard', () => {
         .forBrowser('chrome')
         .setChromeOptions(new chrome.Options().headless())
         .build();
-    
-
+        
         try {
             await driver.get("https://www.koios.online/newviewer");
             await sleep(10000);
-            await driver.findElement(By.xpath("/html/body/div[2]/div[9]/div[3]/div/div[1]/div[3]/div")).click();
+            await driver.findElement(By.xpath("/html/body/div[2]/div[9]/div[1]/div[2]/img")).click();
 
-            let result = await driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[1]/div[5]/div/div[1]/div/div[1]/img[2]")).getAttribute("data-src");
-            expect(result).toBe("https://ipfs.io/ipfs/QmdFjFiaKaFCw5ocioFXHWGrFoZFTCk94oVobpxUrWP5Wv");
+            let result = await driver.findElement(By.xpath("/html/body/div[7]/div[2]/div[5]/div[2]")).getText();
+            expect(result).toBe("Settings");
         } finally {
             driver.close();
         }
