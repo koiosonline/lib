@@ -15,7 +15,7 @@ beforeAll(async () => {
 })
 
 describe('dashboard', () => {
-    test('go button exists', async () => {
+    it('should check if button GO exists', async () => {
         let driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options().headless())
@@ -33,7 +33,7 @@ describe('dashboard', () => {
         }
     });
 
-    test('go button click', async () => {
+    it('should simulate a mouseclick on the GO button', async () => {
         let driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options().headless())
@@ -51,7 +51,7 @@ describe('dashboard', () => {
         }
     });
 
-    test('settings button click', async () => {
+    it('should simulate a mouseclick on the settings button', async () => {
         let driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options().headless())
@@ -69,7 +69,7 @@ describe('dashboard', () => {
         }
     });
 
-    test('community button click', async () => {
+    it('should simulate a mouseclick on the community button', async () => {
         let driver = await new Builder()
             .forBrowser('chrome')
             .setChromeOptions(new chrome.Options().headless())
