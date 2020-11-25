@@ -29,7 +29,11 @@ if (window.ethereum)
     else
         window.ethereum=1; // so at least a box is shown
 
+<<<<<<< HEAD
+window.addEventListener('DOMContentLoaded', asyncloaded);  // load  
+=======
 
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
  
 export function ClearCachedProvider() {
     web3Modal.clearCachedProvider();
@@ -153,11 +157,16 @@ async function fetchAccountData() {
 		if (profile.image) {
 			var imagecid=profile.image[0].contentUrl
 			imagecid=imagecid[`\/`]
+<<<<<<< HEAD
+			globalprofileimage=await GetImageIPFS(imagecid)
+			var domid=getElement("userphoto"); if (domid) domid.src=globalprofileimage
+=======
 			
             GetImageIPFS(imagecid).then(globalprofileimage=> {  // don't wait for this, could take a while
                 var domid=getElement("userphoto"); 
                 if (domid) domid.src=globalprofileimage
             })
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
 		}
 	}    
 
@@ -221,9 +230,15 @@ var fOnlyOnce=false;
 async function onConnect() {
   	if (fOnlyOnce) return;
   	fOnlyOnce=true;
+<<<<<<< HEAD
   
   	//getElement("WEB3_CONNECT_MODAL_ID").style.zIndex="20" // to make sure it's in front of everything
   
+=======
+  
+  	//getElement("WEB3_CONNECT_MODAL_ID").style.zIndex="20" // to make sure it's in front of everything
+  
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
   	try {
     	provider = await web3Modal.connect();
     
@@ -273,7 +288,11 @@ subscribe("web3providerfound",NextStep)
 var init3boxpromise;
 
 async function NextStep() {
+<<<<<<< HEAD
+    init3boxpromise=Init3box();  
+=======
    // init3boxpromise=Init3box();  // not done automatically (requires extra signing)
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
 }     
 
 async function Init3box() {
@@ -283,7 +302,10 @@ async function Init3box() {
 }
 
 export async function getBox() {
+<<<<<<< HEAD
+=======
     if (!init3boxpromise) init3boxpromise=Init3box();
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
     await authorize()
     await init3boxpromise;
     //const verifiedAccounts = await Box.getVerifiedAccounts(getUserAddress()) - unused    
@@ -294,10 +316,13 @@ export async function getBox() {
  * Disconnect wallet button pressed.
  */
 async function onDisconnect() {
+<<<<<<< HEAD
+=======
 
   console.log("Killing the wallet connection", provider);
 
 
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
 	// TODO: Which providers have close method?
 	if(provider.close) {
 		await provider.close();
@@ -313,5 +338,8 @@ async function onDisconnect() {
 	// Set the UI back to the initial state
 	// document.querySelector("#prepare").style.display = "block";
 	//document.querySelector("#connected").style.display = "none";
+<<<<<<< HEAD
+=======
 
+>>>>>>> aa7af6c7c61793e46bae899bee6465a6a3b12caf
 }
