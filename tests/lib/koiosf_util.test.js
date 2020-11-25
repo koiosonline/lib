@@ -1,4 +1,3 @@
-
 import { getElement } from '../../lib/koiosf_util.mjs';
 import { getElementVal } from '../../lib/koiosf_util.mjs';
 
@@ -63,7 +62,7 @@ describe('getElementVal', () => {
         expect(getElementVal('firstName')).not.toBe('    first name   ');
     });
 
-    it('should return the content of the first paragraph with class "firstname" and contain "test"', () => {
+    it('should return the content of the first paragraph with class "firstname" and contain "last"', () => {
         document.body.innerHTML = mockContent;
         expect(getElementVal('lastName')).toContain('last');
     });

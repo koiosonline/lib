@@ -1,0 +1,44 @@
+.dm {
+  filter: invert(1);
+}
+
+.ndm{
+  filter: invert(1);
+}
+
+.dm .courseicon, .courselistitem img, .progressbar {
+  filter: invert(1);
+}
+
+
+.head {
+  background-color: rgba(255, 255, 255, 0)!important;
+}
+
+
+.info {
+  filter: grayscale(1);
+}
+.flasqbgn {
+  -webkit-animation: rainbow 4s steps(36) infinite;
+
+
+  }
+/* Koios Dark Mode BETA - WIP */
+
+
+@-webkit-keyframes rainbow {
+   from { -webkit-filter:hue-rotate(10deg); }
+     to { -webkit-filter:hue-rotate(360deg); }
+}
+
+@keyframes rainbow {
+ from {
+    -webkit-filter:hue-rotate(10deg);
+            filter:hue-rotate(10deg);
+    }
+  to {
+    -webkit-filter:hue-rotate(360deg);
+            filter:hue-rotate(360deg);
+    }
+}
