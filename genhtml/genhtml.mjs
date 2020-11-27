@@ -852,7 +852,7 @@ async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,button
         var right=""
         var bottom=""
         var paddingbottom=""
-        var fflex=false;
+        var fflex="";
         var dimensions=""
         var objecttype="div" // standard type
         var strhref=""
@@ -999,9 +999,15 @@ console.log(dimensions)
 				if (fthisisabutton && !fstaticwidth) {
 					width=undefined; // let the button create its width automatically
 				}
-                
-                
+              
+               if (figdata.counterAxisSizingMode=="FIXED")
+                 switch(figdata.counterAxisAlignItems) { // new way                        
+                        case "CENTER":   fflex +="align-self: center;justify-content: center;";    break;
+                        case "MAX":      fflex +="align-self: flex-end;";  break;
+                        default:      fflex +="align-self: flex-start;";break;
+                   } 
 				
+               
                  if (fpartofflex) {
                     // console.log(width,height,left,right,bottom,top,paddingbottom)
                     if (figdata.type=="TEXT")  {  // ??&& !fstaticwidth
@@ -1016,12 +1022,25 @@ console.log(dimensions)
                     transform=""
                     
                     
-                     switch(figdata.layoutAlign) {
+                    dimensions="" // check
+                    height=undefined
+                    width=undefined
+                    
+                    
+                    console.log(`fpartofflex ${fpartofflex}`)
+                   
+                   /* 
+                     switch(figdata.layoutAlign) { // old way
                         case "MIN":      strstyle +="align-self: flex-start;";break;
                         case "CENTER":   strstyle +="align-self: center;";    break;
                         case "MAX":      strstyle +="align-self: flex-end;";  break;
                         case "STRETCH":  break; // no style needed
+                        case "INHERIT": break;
                    } 
+                   
+                 */
+               
+                   
                     
                     
                    // console.log("fpartofflex");
@@ -1060,7 +1079,7 @@ console.log(dimensions)
                     switch (figdata.layoutMode) {
                         case "VERTICAL": {
                                     dimensions+="flex-direction: column;";
-                                    fflex=`margin-bottom: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`;
+                                    fflex+=`margin-bottom: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`;
 									dimensions +=`padding-top:    ${figdata.verticalPadding?figdata.verticalPadding:0}px; `
 									dimensions +=`padding-bottom: ${(figdata.verticalPadding?figdata.verticalPadding:0)-(figdata.itemSpacing?figdata.itemSpacing:0)}px; `
 									dimensions +=`padding-left:   ${figdata.horizontalPadding?figdata.horizontalPadding:0}px; `
@@ -1077,7 +1096,7 @@ console.log(dimensions)
                         } 
                         case "HORIZONTAL": {
                                     dimensions +="flex-direction: row;";
-                                    fflex=`margin-right: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`; 
+                                    fflex+=`margin-right: ${figdata.itemSpacing?figdata.itemSpacing:0}px;`; 
 																		
 									dimensions +=`padding-top:    ${figdata.verticalPadding?figdata.verticalPadding:0}px; `
 									dimensions +=`padding-bottom: ${figdata.verticalPadding?figdata.verticalPadding:0}px; `

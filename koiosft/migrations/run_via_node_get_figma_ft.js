@@ -36,7 +36,7 @@ console.log(documentpart)
     cid=await MakeImage(ipfs, "TitanToken",documentpart,"TD20B"); 	   list.push({name:"TitanTD20B",cid:cid} );
 	
     console.log(list);
-	fs2.writeFile('tokens.json', JSON.stringify(list),console.log)
+	await fs2.writeFile('tokens.json', JSON.stringify(list),console.log)
 };
 
 async function FigmaApiGetImageSrc(url,token) {
