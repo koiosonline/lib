@@ -9,7 +9,7 @@ var ERC20Token = artifacts.require("ERC20Token");
 
 
 const fs2 = require('fs');
-const toarrayamount = JSON.parse(fs2.readFileSync("distribute_titan_tdfa.json").toString())
+const toarrayamount = JSON.parse(fs2.readFileSync("distribute_titan.json").toString())
 console.log(toarrayamount)
  
 module.exports = async function(deployer) {  
@@ -33,7 +33,7 @@ module.exports = async function(deployer) {
 
 		for (var item of toarrayamount)  {	
             var dest=item[0]            
-            if (name.includes("TD20B")) await MintandProcess(tokenaddress,item[1] ,ERC20TokenContract[i],dest,acts[0],decimals)
+            if (name=="Titan") await MintandProcess(tokenaddress,item[1] ,ERC20TokenContract[i],dest,acts[0],decimals)
             //if (name.includes("Koios")) await MintandProcess(tokenaddress,item[2] ,ERC20TokenContract[i],dest,acts[0],decimals)
                 
             
