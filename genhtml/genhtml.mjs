@@ -845,7 +845,7 @@ async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,button
         var image=""
         var surroundingdiv=""
         var display=""
-        var width=""
+        var width="" 
         var height=""
         var left=""
         var top=""

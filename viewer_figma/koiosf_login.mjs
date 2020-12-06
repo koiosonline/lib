@@ -155,7 +155,10 @@ async function fetchAccountData() {
 			
             GetImageIPFS(imagecid).then(globalprofileimage=> {  // don't wait for this, could take a while
                 var domid=getElement("userphoto"); 
-                if (domid) domid.src=globalprofileimage
+                if (domid) {
+                    domid.src=globalprofileimage
+                    domid.style.width="100%" // workaround
+                }
             })
 		}
 	}    
