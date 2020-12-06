@@ -538,9 +538,10 @@ async function AdjustTitle(){
         { name: 'description' },
         ]
 
-    var figTitle = document.querySelector('.meta .__title').innerText;
-    var figDesc = document.querySelector('.meta .__desc').innerText;
-    document.querySelector('.meta').remove()
+    var figTitle = document.querySelector('.meta .__title')?.innerText;
+    
+    var figDesc = document.querySelector('.meta .__desc')?.innerText;
+    document.querySelector('.meta')?.remove()
     document.title = figTitle;
     var metaDesc = document.createElement('meta');
     SetAttributes(metaDesc, {'name': metaProps[2].name, 'content': figDesc});
