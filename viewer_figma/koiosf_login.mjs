@@ -157,7 +157,7 @@ async function fetchAccountData() {
                 var domid=getElement("userphoto"); 
                 if (domid) {
                     domid.src=globalprofileimage
-                    domid.style.width="100%" // workaround
+                    // domid.style.width="100%" // workaround => doesn't work
                 }
             })
 		}
