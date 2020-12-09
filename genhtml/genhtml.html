@@ -11,6 +11,9 @@ div {
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 
 <script src="../lib/index.min.js"></script>  <!-- https://unpkg.com/ipfs-http-client/dist/index.min.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/json-formatter-js@2.3.4/dist/json-formatter.umd.min.js"></script>
+
 <script type="module" src="./genhtml.mjs"></script>
 
 </head>
@@ -36,6 +39,7 @@ ipfs:       <span id="ipfs"></span>
 <!--button onclick="start()">Start</button-->
 
 <pre id="output"></pre>
+<pre id="object" style="height:50%;overflow: scroll;width:100%;float:left"></pre>
 <button id="SaveOnIpfs" ></button>
 <button id="AlsoInject" ></button>
 <button id="Reload" >Reload</button>
