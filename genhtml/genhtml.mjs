@@ -1,9 +1,6 @@
-
-
 function genhtmlsleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 function log(s) {
     var logtext=document.getElementById("log"); 
     if ((typeof s) !="string")  {
@@ -14,7 +11,6 @@ function log(s) {
         logtext.innerHTML +=s+"\r";
     logtext.scrollTop = logtext.scrollHeight; // keep the windows "scrolled down"
 }
-
 function SetupField(id) {
     let params = (new URL(document.location)).searchParams;
     let idvalue= params.get(id); 
@@ -35,24 +31,6 @@ function SetupField(id) {
         console.log(txt.target.innerText); 
     }
 }    
-
-
-//const fetch = require('node-fetch');
-
-
-
-SetupField("figmakey")
-SetupField("pageid")
-SetupField("components")
-SetupField("objname")
-SetupField("mjspath")
-SetupField("embed")
-SetupField("pin")
-
-
-start();
-
-
 async function FigmaApiGet(url,token) { // cache to prevent rate limit errors by figma
     var fcache=url.includes("images")    
     if (fcache) {
@@ -66,7 +44,6 @@ async function FigmaApiGet(url,token) { // cache to prevent rate limit errors by
         localStorage.setItem(url, y);
     return obj;    
 }
-
 async function FigmaGetImage(url) {
         //console.log(`FigmaApiGetImage Loading ${url}`);
         var p1=await fetch(url)
@@ -79,8 +56,6 @@ async function FigmaGetImage(url) {
         return blob;
     
 }    
-
-
 async function ClearCache() {
 console.log("In ClearCache")
 console.log(localStorage);
@@ -98,20 +73,11 @@ var keys = Object.keys(localStorage);
 
 
 }
-
-
 function MakeBlob(html,fjavascript) {
     var blob = new Blob([html], {type: (fjavascript?'text/javascript':'text/html')});
     var url = URL.createObjectURL(blob);      
     return url;
 }    
-
-
-var genhtmlsleeptimer=0;
-
-var retry=0;
-var imagesloaded=0;
-
 async function FigmaApiGetImageSrc(url,token) {
     for (var i=0;i<8;i++) {
         if (i > 0) {
@@ -163,13 +129,6 @@ async function FigmaApiGetImageSrc(url,token) {
         return { type: "image", blob:blob, url:url2 }; // also end for loop
     }
 }
-
-
-var ipfscounter=0
-
-
-
-
 async function SaveToIPFS(data) {            
     console.log("SaveToIPFS");
 	ipfscounter++;
@@ -212,45 +171,6 @@ async function SaveToIPFS(data) {
 	}	
     return result.path;    
 }
-	
-	
-	
-	/*
-	
-	if (ipfs2) {
-
-		if (result) {
-			
-			for await (const file of ipfs1.get(cid)) {				
-				console.log(file.content);
-				if (file.content) ;
-			       return cid; // already present, no need to upload
-		    }
-		}
-	}
-	console.log("saving on infura");
-    result = await ipfs1.add(data) 	
-	*/
-	
-
-
-// http://www.gpersoon.com:8080/ipfs/QmRDDFeTUve2Lxq77t5MqjNNQrGVMYoD5Nje9ai3YPug3U
-
-// http://192.168.0.40:8080/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/welcome
-// http://gpersoon.com:8080/ipfs/QmfQkD8pBSBCBxWEwFSu4XaDVSWK6bjnNuaWZjMyQbyDub/#/welcome
-
-
-var globalpinlocation;
-
-
-
-let globalconnectto=[]
-let imagelist=[]
-
-var ipfs;
-
-
-
 async function SaveOnIpfs(data) {
 console.log(`in SaveOnIpfs ${globalpinlocation}`);
 console.log(data);
@@ -266,10 +186,6 @@ document.getElementById("SaveOnIpfs").innerHTML=""
     //return `http://www.gpersoon.com:8080/ipfs/${result}`;
     //return `https://ipfs.io/ipfs/${result}`;
 }
-
-
-
-
 function FindObject(objname,figdata) {
 //console.log(figdata);
 
@@ -284,159 +200,12 @@ function FindObject(objname,figdata) {
         }
     return undefined; // not found        
 }
-
-var globalobjname;
-var globalembed;
-var globalpagesfirstpass=1;
-
-
-/*
-function FindRelated(components,object) {
-    var keys = Object.keys(components);
-    if (keys.length > 0) {
-        for (var j=0;j< keys.length;j++) {
-            var id2=keys[j]
-            var val2=components[id2];
-            if (val2.name.includes(val.name))
-                console.log(val2.name)
-                    
-}    
-
-*/
-
-
 function IsButton(name) {
     return name.includes("btn-")
 }    
-/*
-async function GetComponents(componentsid,token) {
-    var componentlist=[];
-    if (componentsid) {
-        var componentspart=await FigmaApiGet(`https://api.figma.com/v1/files/${componentsid}`,token)        
-        var components=componentspart.components
-        var figmadocument=componentspart.document;
-        console.log(components)
-
-        
-        var keys = Object.keys(components);
-        if (keys.length > 0) {
-            //console.log(keys);
-            for (var i = 0; i < keys.length; i++) {
-                var id=keys[i];
-                var val = components[id];
-                if (IsButton(val.name)) {
-                    componentlist[val.name] = ConvertToHTML(id,figmadocument,componentsid,token)
-                }
-            }
-        }
-        console.log(componentlist);
-           
-        var keys = Object.keys(componentlist);
-        if (keys.length > 0) {
-            //console.log(keys);
-            for (var i = 0; i < keys.length; i++) {
-                var id=keys[i];
-                console.log(id)
-                var val = (await componentlist[id]).htmlobj;
-                console.log(val);
-                
-            }
-        }
-        var res=await RetrieveLinkedPages(componentlist,false)
-        console.log(res);
-        return res;               
-    }
-}
-*/
-
- //var globalbuttons;
- var globalcomponentsdocument=undefined;
-
-var globalcomponentsid;
-var orglocation
-
-
 async function Reload() {    
    location.href=orglocation;
-}   
-var globalmjspath;
-var globalfigmadocument;
-var globaldocumentid;
-var globaltoken;
-
-async function start() {
-    
-    orglocation=location.href
-    
-    globaltoken=document.getElementById("figmakey").innerHTML.trim();
-    globaldocumentid=document.getElementById("pageid").innerHTML.trim();    
-    globalcomponentsid=document.getElementById("components").innerHTML.trim();    
-    globalobjname=document.getElementById("objname").innerHTML.trim();
-    globalembed=document.getElementById("embed").innerHTML.trim();
-    globalmjspath=document.getElementById("mjspath").innerHTML.trim();
-    
-    if (globaltoken.replace(/\./g,'')=="") { log("Figma token missing");return;}
-    if (globaldocumentid.replace(/\./g,'')=="") { log("Document id missing");return;}
-    if (globalembed.replace(/\./g,'')=="") globalembed=undefined; // if only ..., then no embed
-    if (globalcomponentsid.replace(/\./g,'')=="") globalcomponentsid=undefined; // if only ..., then no embed
-    
-    
-    log("Pass 1");
-    globalpinlocation=document.getElementById("pin").innerHTML.trim();
-    console.log(`Start ${globaltoken} ${globaldocumentid}`);
-	ipfs = window.IpfsHttpClient(globalpinlocation); // 'https://ipfs.infura.io:5001'
-//ipfs2 = window.IpfsHttpClient('http://diskstation:5002'); 
-console.log(ipfs);
-
-
-	
-	
-    
-    //globalbuttons=await GetComponents(componentsid,token)
-    if (globalcomponentsid) {
-        var components=(await FigmaApiGet(`https://api.figma.com/v1/files/${globalcomponentsid}`,globaltoken));
-        if (components.err) {log(`Error retrieving figma info: ${components.status} ${components.err} `);return;}
-        console.log(components);
-        globalcomponentsdocument=components.document
-    }
-    
-    var url=`https://api.figma.com/v1/files/${globaldocumentid}`  // to export the vectors: ?geometry=paths    
-    var documentpart=await FigmaApiGet(url,globaltoken)
-    
-    if (documentpart.err) {log(`Error retrieving figma info: ${documentpart.status} ${documentpart.err} `);return;}
-    console.log(documentpart);
-          
-    
- 
-    
-    
-    
-    globalfigmadocument=documentpart.document;
-    console.log(globalfigmadocument);
-    //log(`Found page: ${globalfigmadocument.name?globalfigmadocument.name:""} ${globalfigmadocument.id}`);    
-    var fo=FindObject(globalobjname,globalfigmadocument)
-    console.log(fo);
-    
-    if (!fo) {
-         log(`Can't find: ${globalobjname}`);
-         return;
-    }
-    
-    //log(`Page: ${globalpagesfirstpass++} ${globalobjname} ${fo.id}`); // id: ${fo.id}
-    
-
-    globalconnectto[fo.id] = ConvertToHTML(fo.id,globalfigmadocument,globaldocumentid,globaltoken)
-	
-	await RetrieveLinkedPages(globalconnectto);
-    
-    //log(`globalconnectto: ${JSON.stringify(Object.keys(globalconnectto))}`);
-	console.log(globalconnectto);
-	
-    await ShowInBrowser()
-    document.getElementById("SaveOnIpfs").innerHTML="Save on IPFS"  
-    document.getElementById("AlsoInject").innerHTML="Inject in current page"  
-}    
-    
+}     
 async function ShowInBrowser() {	
 	var completepage=await RenderPages(globalconnectto,false);
     //console.log(completepage);
@@ -444,9 +213,7 @@ async function ShowInBrowser() {
     var url=MakeBlob(html);    
     document.getElementById("output").innerHTML += `Complete page=${MakeUrl(url)}`   
 }		
-	
-    
-export async function SaveAlsoOnIpfs() {
+async function SaveAlsoOnIpfs() {
     console.log(`SaveAlsoOnIpfs firstpage=${globalobjname}`);
     var completepage=await RenderPages(globalconnectto,true);
 	var javascript1=await MakePage2(completepage,globalembed,globalfonts,globalmediastyles,globalobjname,true,globalmjspath)    
@@ -465,8 +232,7 @@ export async function SaveAlsoOnIpfs() {
 	
     document.getElementById("output").innerHTML += str2;
 }
- 
-export async function AlsoInject() {
+async function AlsoInject() {
 	var completepage=await RenderPages(globalconnectto,false);
 	var modulesource=await MakePage2(completepage,globalembed,globalfonts,globalmediastyles,globalobjname,false,globalmjspath)     
     var tag="//--script--"
@@ -478,9 +244,6 @@ export async function AlsoInject() {
     var html=document.getElementsByTagName("html")[0]
     await import(url2);		   
 } 
-
- 
-    
 async function RetrieveLinkedPages(globalconnectto) {
     log("Pass 2: RetrieveLinkedPages");
 	//log(`globalconnectto: ${JSON.stringify(Object.keys(globalconnectto))}`);
@@ -513,8 +276,6 @@ async function RetrieveLinkedPages(globalconnectto) {
 	} while (left > 0);
     
 }
-
-
 async function RenderPages(globalconnectto,fIPFS) {
 	log("Step 3: RenderPages");
 	var completepage=""
@@ -532,19 +293,6 @@ async function RenderPages(globalconnectto,fIPFS) {
 		} 
 		return completepage
 }    
-    
-    
-    
-    
-let globalmediastyles = []
-let globalfonts = []
-
-   
- 
-    
-    
-    
-    
 async function ConvertToHTML(foid,figmadocument,documentid,token) {  
     var currentobject=FindObject(foid,figmadocument)
     
@@ -560,9 +308,6 @@ async function ConvertToHTML(foid,figmadocument,documentid,token) {
     //log(`Exit ConvertToHTML ${foid} name: ${currentobject.name}`);    
     return returnset;
 }    
-    
-    
-    
 function GetMediaStyles(globalmediastyles) {
     var stylestr=""
     var keys = Object.keys(globalmediastyles);
@@ -580,8 +325,6 @@ function GetMediaStyles(globalmediastyles) {
     }
     return stylestr;
 }
-      
-
 function GetFontsArray(globalfonts) { 
     var list=[]
     var fontstr=""
@@ -601,8 +344,6 @@ function GetFontsArray(globalfonts) {
     }
     return list;
 }    
-	  
-
 function GetFonts(globalfonts) { 
 	var list =GetFontsArray(globalfonts)
 	var fontstr=""
@@ -611,7 +352,6 @@ function GetFonts(globalfonts) {
 	console.log(fontstr);
     return fontstr;
 }    
-
 function MakeScriptTag(fModule,src,content) { // string trick to prevent confusion by javascript interpreter
        var str="<"+"script "
        if (fModule)
@@ -624,46 +364,6 @@ function MakeScriptTag(fModule,src,content) { // string trick to prevent confusi
        str +="<"+"/"+"script"+">"        
        return str;
 }
-
-
-var errorscript=`<script>
-
-window.onerror = function(message, source, lineno, colno, error) {   // especially for ios
-    console.log("In onerror");
-    var str="Error: "+message+" "+source+" "+lineno+" "+colno+" ";
-    if (error && error.stack) str += error.stack;
-    
-    //console.log(error.stack);
-    
-    alert(str)
-    
-} 
-</script>
-`
-
-/*            
-function MakeHeader(embed,globalfonts,globalmediastyles) {   
-    var strprefix=""    
-    
-    strprefix +='<head>'	
-	strprefix +='<meta charset="utf-8" />'
-    strprefix +='<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">'    
-    strprefix +=errorscript;
-    strprefix += GetFonts(globalfonts);
-    if (embed) {
-        console.log(`Embedding ${embed}`); 
-        strprefix +=MakeScriptTag(true,embed)        
-    }
-    strprefix += GetMediaStyles(globalmediastyles);
-    strprefix +='</head>'
-    return strprefix;
-}
-    
-*/
-
-
- 
-
 async function MakePage2(strinput,embed,globalfonts,globalmediastyles,firstpage,fIPFS,mjspath) {
 	
 	var loadimagescript= mjspath+"/genhtml/startgen.mjs"
@@ -684,6 +384,25 @@ async function MakePage2(strinput,embed,globalfonts,globalmediastyles,firstpage,
         injectscript+='   head.appendChild(link);\n'
 	}	
 	// add errorscript
+    /*
+    var errorscript=`<script>
+
+window.onerror = function(message, source, lineno, colno, error) {   // especially for ios
+    console.log("In onerror");
+    var str="Error: "+message+" "+source+" "+lineno+" "+colno+" ";
+    if (error && error.stack) str += error.stack;
+    
+    //console.log(error.stack);
+    
+    alert(str)
+    
+} 
+</script>
+`
+    */
+    
+    
+    
 	
 	injectscript +='\nasync function init() { \n'
     injectscript +=`   document.getElementsByTagName("body")[0].innerHTML = newbody;\n`    // this is a synchronous actions
@@ -721,24 +440,12 @@ if (embed) {
     return str;	
 	
 }
-
-
- 
- 
-
-    
 function MakeUrl(url) {
     return `<a href="${url}" target="_blank"> ${url}` + " in new page</a><br>"
 }
-
-
-
-
-
 function _convertFigmaColorToRGB(value) {
     return Math.ceil(value * 255);
 }
-
 async function  recursehtml(htmlobjpromise,fIpfs) {
     var str=""
     if (typeof(htmlobjpromise) == "string")
@@ -767,8 +474,6 @@ async function  recursehtml(htmlobjpromise,fIpfs) {
     }    
    return str;
 }
-
-
 function GetAtParam(figdata,name) {
     var pos=figdata.name.indexOf(name);
     if (pos < 0) return undefined;
@@ -781,13 +486,9 @@ function GetAtParam(figdata,name) {
     //console.log(`GetAtParam ${name} ${rest}`)
     return rest.length==0?true:rest;
 }
-
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-
 async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,buttonlevel,fpartofflex,pb) { // pb is (optional) parent boundingbox
         var htmlobjects=[]                        
         console.log(`Processing ${figdata.name} with ${figdata.children ? figdata.children.length : 0} children`);    //Type:${figdata.type}
@@ -1487,26 +1188,97 @@ function ConvertColor(color) {
     }    
 
 
-        
+async function start() {
+    orglocation         =location.href
+    globaltoken         =document.getElementById("figmakey").innerHTML.trim();
+    globaldocumentid    =document.getElementById("pageid").innerHTML.trim();    
+    globalcomponentsid  =document.getElementById("components").innerHTML.trim();    
+    globalobjname       =document.getElementById("objname").innerHTML.trim();
+    globalembed         =document.getElementById("embed").innerHTML.trim();
+    globalmjspath       =document.getElementById("mjspath").innerHTML.trim();
+    if (globaltoken.replace(/\./g,'')=="")          { log("Figma token missing");return;}
+    if (globaldocumentid.replace(/\./g,'')=="")     { log("Document id missing");return;}
+    if (globalembed.replace(/\./g,'')=="")          globalembed=undefined; // if only ..., then no embed
+    if (globalcomponentsid.replace(/\./g,'')=="")   globalcomponentsid=undefined; // if only ..., then no embed
+    log("Pass 1");
+    globalpinlocation=document.getElementById("pin").innerHTML.trim();
+    console.log(`Start ${globaltoken} ${globaldocumentid}`);
+    ipfs = window.IpfsHttpClient(globalpinlocation); // 'https://ipfs.infura.io:5001'
+
+    //globalbuttons=await GetComponents(componentsid,token)
+    if (globalcomponentsid) {
+        var components=(await FigmaApiGet(`https://api.figma.com/v1/files/${globalcomponentsid}`,globaltoken));
+        if (components.err) {log(`Error retrieving figma info: ${components.status} ${components.err} `);return;}
+        console.log(components);
+        globalcomponentsdocument=components.document
+    }
+    var url=`https://api.figma.com/v1/files/${globaldocumentid}`  // to export the vectors: ?geometry=paths    
+    var documentpart=await FigmaApiGet(url,globaltoken)
+    if (documentpart.err) {log(`Error retrieving figma info: ${documentpart.status} ${documentpart.err} `);return;}
+    console.log(documentpart);
+    globalfigmadocument=documentpart.document;
+    console.log(globalfigmadocument);
+    //log(`Found page: ${globalfigmadocument.name?globalfigmadocument.name:""} ${globalfigmadocument.id}`);    
+    var fo=FindObject(globalobjname,globalfigmadocument)
+    console.log(fo);
+    if (!fo) {
+         log(`Can't find: ${globalobjname}`);
+         return;
+    }
+    const config={
+        hoverPreviewEnabled: true,
+        hoverPreviewArrayCount: 100,
+        hoverPreviewFieldCount: 5,
+        animateOpen: false,
+        animateClose: false,
+        useToJSON: true
+    }
+    const formatter = new JSONFormatter(fo,1,config);
+    document.getElementById("object").appendChild(formatter.render());
+    //log(`Page: ${globalpagesfirstpass++} ${globalobjname} ${fo.id}`); // id: ${fo.id}
+    globalconnectto[fo.id] = ConvertToHTML(fo.id,globalfigmadocument,globaldocumentid,globaltoken)
+    await RetrieveLinkedPages(globalconnectto);
+    //log(`globalconnectto: ${JSON.stringify(Object.keys(globalconnectto))}`);
+    console.log(globalconnectto);
+    await ShowInBrowser()
+    document.getElementById("SaveOnIpfs").innerHTML="Save on IPFS"  
+    document.getElementById("AlsoInject").innerHTML="Inject in current page"  
+} 
 
 
+// Global variables
+var ipfscounter=0
+var globalpinlocation;
+let globalconnectto=[]
+let imagelist=[]
+var ipfs; 
+let globalmediastyles = []
+let globalfonts = []
+var globalmjspath;
+var globalfigmadocument;
+var globaldocumentid;
+var globaltoken;
+var globalobjname;
+var globalembed;
+var globalpagesfirstpass=1;
+var genhtmlsleeptimer=0;
+var retry=0;
+var imagesloaded=0;
+var globalcomponentsdocument=undefined;
+var globalcomponentsid;
+var orglocation
 
 document.getElementById("SaveOnIpfs").addEventListener("click", SaveAlsoOnIpfs)
 document.getElementById("AlsoInject").addEventListener("click", AlsoInject)
 document.getElementById("ClearCache").addEventListener("click", ClearCache)
 document.getElementById("Reload").addEventListener("click", Reload)
 
+SetupField("figmakey")
+SetupField("pageid")
+SetupField("components")
+SetupField("objname")
+SetupField("mjspath")
+SetupField("embed")
+SetupField("pin")
 
-
-
-/*
-var svg=""
-svg +=`<svg width="${figdata.size.x}" height="${figdata.size.y}" viewBox="0 0 ${figdata.size.x} ${figdata.size.y}" fill="none" xmlns="http://www.w3.org/2000/svg">`
-                
-for (var i=0;i<figdata.strokeGeometry.length;i++) {
-    console.log(figdata.strokeGeometry[i].path);
-    console.log(figdata.strokeGeometry[i].windingRule);
-    svg +=`<path d="${figdata.strokeGeometry[i].path}" stroke="#FF206E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`
-}
-svg +="</svg>"
-*/
+start();
