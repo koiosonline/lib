@@ -517,10 +517,8 @@ async function FixImages(entries, observer) { entries.forEach(FixEntry);  }
 
 
 export function PrepLazy(domid,floaddirect) {
-    console.log("In PrepLazy 1")
 	if ( !("IntersectionObserver" in window))
 		return;
-    console.log("In PrepLazy 2")
 	if (!domid) domid=document;
 	
 	var lazyImages = [].slice.call(domid.querySelectorAll("img.lazy"));
