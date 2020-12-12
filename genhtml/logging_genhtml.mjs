@@ -11,6 +11,28 @@ function log(s) {
         logtext.innerHTML +=s+"\r";
     logtext.scrollTop = logtext.scrollHeight; // keep the windows "scrolled down"
 }
+
+function log2newline(indentlevel) {
+    var logtext=document.getElementById("log2"); 
+     
+    if (logtext)
+        logtext.innerHTML +="\r"+"  ".repeat(indentlevel);
+    logtext.scrollTop = logtext.scrollHeight; // keep the windows "scrolled down"
+}
+
+function log2add(s) {
+    var logtext=document.getElementById("log2"); 
+    if ((typeof s) !="string")  {
+        console.log("converting to string");
+        s = JSON.stringify(s);
+    }   
+    if (logtext)
+        logtext.innerHTML +=s+" ";
+    logtext.scrollTop = logtext.scrollHeight; // keep the windows "scrolled down"
+}
+
+
+
 function SetupField(id) {
     let params = (new URL(document.location)).searchParams;
     let idvalue= params.get(id); 
@@ -151,13 +173,10 @@ async function SaveToIPFS(data) {
 		if (hashcid) return hashcid; // already uploaded
 	}
 	
-	console.log(`Storing on infura ${data.size} ${data.length} bytes `)
-    
+	console.log(`Storing on infura ${data.size} bytes `)
 	var timeout=2000;
 	
 	for (var i=0;i<15;i++) {
-        console.log(`sleep ${timeout}`)
-        await genhtmlsleep(timeout)
         if (i > 0) {
             console.log(`Retry ${i} for ${data.size} bytes`); 
             timeout +=2000; 
@@ -172,17 +191,17 @@ async function SaveToIPFS(data) {
 			localStorage.setItem(hashHex, result.path);
 		if (result.path) return result.path;
 	}	
-    console.error(result)
-    return undefined;     // was not able to save
+    return result.path;    
 }
 async function SaveOnIpfs(data) {
 console.log(`in SaveOnIpfs ${globalpinlocation}`);
+console.log(data);
 
 
 document.getElementById("SaveOnIpfs").innerHTML=""
     var result=await SaveToIPFS(data)
-    console.log(`After SaveOnIpfs: ${result}`);
-    
+    console.log("saved SaveOnIpfs");
+    console.log(result);
     return "https://ipfs.io/ipfs/"+result; // fix to get it to work also on ipns
 
     //document.getElementById("output").innerHTML += str2;
@@ -305,7 +324,7 @@ async function ConvertToHTML(foid,figmadocument,documentid,token) {
     globalpagesfirstpass++ // only increase if a page is really present
     
     //console.log(currentobject)
-    var htmlobj=await recurse(currentobject,figmadocument,documentid,token,false,0,false,undefined); // retrieve the found object
+    var htmlobj=await recurse(0,currentobject,figmadocument,documentid,token,false,0,false,undefined); // retrieve the found object
     
     var returnset={ name:currentobject.name, id: foid, htmlobj: htmlobj }    
     //log(`Exit ConvertToHTML ${foid} name: ${currentobject.name}`);    
@@ -461,7 +480,7 @@ async function  recursehtml(htmlobjpromise,fIpfs) {
 //console.log(  htmlobj)      
    if (htmlobj.type && htmlobj.type=="image") {
         if (fIpfs)
-            return await SaveOnIpfs(htmlobj.blob) // not too fast to prevent rate limit errors
+            return SaveOnIpfs(htmlobj.blob)
         else
            return htmlobj.url;
    }
@@ -492,9 +511,18 @@ function GetAtParam(figdata,name) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,buttonlevel,fpartofflex,pb) { // pb is (optional) parent boundingbox
-        var htmlobjects=[]                        
-        console.log(`Processing ${figdata.name} with ${figdata.children ? figdata.children.length : 0} children`);    //Type:${figdata.type}
+
+function print(prefix,value) {
+    if (value) return prefix+":"+value
+    else return ""
+}
+
+async function recurse(indentlevel,figdata,figmadocument,documentid,token,fpartofgrid,buttonlevel,fpartofflex,pb) { // pb is (optional) parent boundingbox
+        var htmlobjects=[]  
+        await sleep(1);
+        log2newline(indentlevel)
+        
+log2add(`${figdata.type} ${figdata.name} ${print("#c",figdata.children?.length)} ${print("gr",fpartofgrid)} ${print("fl",fpartofflex)}`);    //Type:${figdata.type}
         console.log(figdata);
         
 		//log(`Recurse ${figdata.name}`);
@@ -693,6 +721,7 @@ console.log(dimensions)
                             top =`${yoffset}px`
                             bottom =`${yoffsetbottom}px`; // negative number
                             break;
+                            
                         default:
                             top =`${yoffset}px`
                             if (parseFloat(b.height) * 100 > 1) 
@@ -700,6 +729,9 @@ console.log(dimensions)
                     }
                 }
 				
+log2add(`w:${width} t:${top} b:${bottom}`) 
+                
+                
 				if (fthisisabutton && !fstaticwidth) {
 					width=undefined; // let the button create its width automatically
 				}
@@ -713,6 +745,7 @@ console.log(dimensions)
 				
                
                  if (fpartofflex) {
+                     console.log(`fpartofflex, reset`);
                     // console.log(width,height,left,right,bottom,top,paddingbottom)
                     if (figdata.type=="TEXT")  {  // ??&& !fstaticwidth
                         width=undefined; 
@@ -751,6 +784,7 @@ console.log(dimensions)
                    // console.log(width,height,left,right,bottom,top,paddingbottom)
                 }
                 if (fpartofgrid) {
+                    console.log(`fpartofgrid, reset`);
                         ;//strstyle += "grid-area: auto;" // autolayout the childeren on the grid
                     strstyle += "position:relative;" // to be a reference point for further div; don't calculate the sizes, this is done by the grid
                     dimensions =`position: relative;`;      
@@ -767,7 +801,7 @@ console.log(dimensions)
                     
                 }    
                     
-                    
+ log2add(`w:${width} t:${top} b:${bottom}`) 
                 
                 
                 if (fpartofflex && (fpartofflex!==true)) {
@@ -779,6 +813,7 @@ console.log(dimensions)
                     
                     
                     display="flex"
+                    log2add(display)
                     
                     switch (figdata.layoutMode) {
                         case "VERTICAL": {
@@ -807,17 +842,18 @@ console.log(dimensions)
 									dimensions +=`padding-left:   ${figdata.horizontalPadding?figdata.horizontalPadding:0}px; `
 									dimensions +=`padding-right:  ${(figdata.horizontalPadding?figdata.horizontalPadding:0)-(figdata.itemSpacing?figdata.itemSpacing:0)}px; `
 									
-									width=undefined; // determined by underlying divsf
+									width=undefined; // determined by underlying divs
                                     if (figdata.counterAxisSizingMode && figdata.counterAxisSizingMode=="FIXED") {
                                         // keep height 
-                                    } else 
+                                    } else {
                                         height=undefined; // determined by underlying divs                                    
+                                    }
                                     
                         }
                         break;
                     }
                 }
-                
+ log2add(`w:${width} t:${top} b:${bottom}`) 
          if (fgrid)
             display="inline-grid"
         if (gridcols)
@@ -1095,7 +1131,7 @@ function ConvertColor(color) {
             
             dimensions ='position: relative;' // width:95%;height:96%;set dimension to max in order to use of surroundingdiv // only used for buttons ==> let the underlying text define the buttons
             buttonlevel++; // so the rest is relative
-			if (fstaticwidth)         dimensions +=`width:${width};height:${height};`;
+			
 			
             insdata="" // don't put it on buttons itself anymore
             
@@ -1103,6 +1139,10 @@ function ConvertColor(color) {
              //classname = classname.replace("@click", ""); // remove the click from childbutton; its prevent in surroundingdiv
              //classname = classname.replace("@toggle", "");
             
+        }
+        if (fstaticwidth)   {
+            dimensions +=`width:${width};height:${height};`; // was part of if(surroundingdiv)
+            console.log(`fstaticwidth width:${width};height:${height}`)
         }
             
             
@@ -1126,6 +1166,9 @@ function ConvertColor(color) {
             
                 case "a":  strhref=`href="{urllocation}" `;
                 case "div": htmlobjects.push(`<${objecttype} class="${classname}" ${insrtstyle} ${insdata} ${strhref}">${strtxt}\n`) //  ${figdata.type} // title="${figdata.name}
+                
+                            log2add(`${objecttype} ${classname} ${insrtstyle} ${insdata} ${strhref} ${strtxt} w:${width}`)
+                
                             break;
         }
 
@@ -1141,7 +1184,8 @@ function ConvertColor(color) {
                     var fflextopass=fflex; // goed afjust margin here, depending on child#, but with dynamicly duplicted items not useful
                     
                 } else fflextopass=fflex;
-                htmlobjects.push( recurse(children[i],figmadocument,documentid,token,fgrid,(fthisisabutton || buttonlevel)?buttonlevel+1:0,fflextopass,figdata.absoluteBoundingBox) )
+                //log2add(`start recurse for child ${i}`)
+                htmlobjects.push( await recurse(indentlevel+1,children[i],figmadocument,documentid,token,fgrid,(fthisisabutton || buttonlevel)?buttonlevel+1:0,fflextopass,figdata.absoluteBoundingBox) )
             }    
        
             //if (!image) // close the div
@@ -1150,12 +1194,15 @@ function ConvertColor(color) {
 
  
         if (fthisisabutton) { // this is a button so also get all other instance of a button 
-		console.log(`Retrieving other buttons of  ${figdata.name}-----------------------------------------------------------`)
-           htmlobjects.push(GetOtherButton(figdata.name,"--hover"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--active"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--focus"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--disabled"))
-		   console.log(`End retrieving other buttons of  ${figdata.name}-----------------------------------------------------------`)
+           log2newline(indentlevel)
+		   log2add(`Retrieving other buttons of ${figdata.name}-----------------------------------------------------------`)
+           htmlobjects.push(GetOtherButton(indentlevel,figdata.name,"--hover"))
+           htmlobjects.push(GetOtherButton(indentlevel,figdata.name,"--active"))
+           htmlobjects.push(GetOtherButton(indentlevel,figdata.name,"--focus"))
+           htmlobjects.push(GetOtherButton(indentlevel,figdata.name,"--disabled"))
+           log2newline(indentlevel)
+		   log2add(`End retrieving other buttons of  ${figdata.name}-----------------------------------------------------------`)
+            log2newline(indentlevel)
         }
   
 
@@ -1170,18 +1217,18 @@ function ConvertColor(color) {
     
         
         
-       // console.log("Returning from recurse");
-       // console.log(htmlobjects);
+       //log2add("Returning from recurse");
+       //log2add(JSON.stringify(htmlobjects));
         return htmlobjects;
        
 
-    async function GetOtherButton(name,subselect) {    
+    async function GetOtherButton(indentlevel,name,subselect) {    
         var firstpart=name.split(" ")[0]
         //console.log(firstpart);
         if (!globalcomponentsdocument) return ""
         var fo=FindObject(`${firstpart}${subselect}`,globalcomponentsdocument)
         if (!fo) return ""
-        var button=await recurse(fo,figmadocument,globalcomponentsid,token,fgrid,1,fflextopass,undefined) // no bounding=> hidden &max width     // get from componentsid!!!       
+        var button=await recurse(indentlevel+1,fo,figmadocument,globalcomponentsid,token,fgrid,1,fflextopass,undefined) // no bounding=> hidden &max width     // get from componentsid!!!       
       //  console.log("button info is:")
       //  console.log(button);
         return button;
