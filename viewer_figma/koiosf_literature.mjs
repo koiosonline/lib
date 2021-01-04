@@ -223,6 +223,9 @@ function GetTxt(url,txt) {
     txt=txt.replace("github.com/","");
     txt=txt.replace("blob/master/","");
     txt=txt.replace("tree/master/","");
+    txt=txt.replace("web3examples","w3e");
+    txt=txt.replace("ethereum","eth");
+    txt=txt.replace("examples","e");
     txt=txt.replace(".com","");
 	return txt;
 }
