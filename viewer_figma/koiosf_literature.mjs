@@ -200,6 +200,10 @@ function CleanUrl(url) {
 	if (check.protocol != "https:") return undefined; // strip about:, file: etc.
 	url = url.replace("youtube.com/watch?v=","youtube.com/embed/");
 	url = url.replace("youtu.be/","youtube.com/embed/");
+    
+    url = url.replace("github.com/","");
+    url = url.replace("blob/master/","");
+    
 	if (url.includes("youtube.com")) {
 		url=url.split("&")[0]
 	}
