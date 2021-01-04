@@ -201,8 +201,7 @@ function CleanUrl(url) {
 	url = url.replace("youtube.com/watch?v=","youtube.com/embed/");
 	url = url.replace("youtu.be/","youtube.com/embed/");
     
-    url = url.replace("github.com/","");
-    url = url.replace("blob/master/","");
+
     
 	if (url.includes("youtube.com")) {
 		url=url.split("&")[0]
@@ -221,6 +220,10 @@ function GetTxt(url,txt) {
 	txt=txt.replace("www.","")
 	txt=txt.replace("youtube.com/embed/","YT:")	
 	txt=txt.replace("en.m.wikipedia.org/wiki/","Wiki:")
+    txt=txt.replace("github.com/","");
+    txt=txt.replace("blob/master/","");
+    txt=txt.replace("tree/master/","");
+    txt=txt.replace(".com","");
 	return txt;
 }
 
