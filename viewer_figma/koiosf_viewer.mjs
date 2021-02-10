@@ -315,7 +315,7 @@ var globalcommunityinvite
 
 async function SetCurrentCourse() {
     globalcommunity=await GetCourseInfo("community");
-    globalcommunityinvite=await GetCourseInfo("communityinvite");
+    globalcommunityinvite="https://discord.gg/Rk7fWvz6";
 }
 
 function ScrCommunityMadeVisible () {
