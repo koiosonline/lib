@@ -315,7 +315,7 @@ var globalcommunityinvite
 
 async function SetCurrentCourse() {
     globalcommunity=await GetCourseInfo("community");
-    globalcommunityinvite="https://discord.gg/Rk7fWvz6";
+    globalcommunityinvite=await GetCourseInfo("communityinvite");
 }
 
 function ScrCommunityMadeVisible () {
@@ -327,7 +327,7 @@ function ScrCommunityMadeVisible () {
 }
 
 function SlackJoin() {
-	window.open(globalcommunityinvite, '_blank');
+	window.open("https://discord.gg/Rk7fWvz6", '_blank');
 }
 
 async function asyncloaded() {
