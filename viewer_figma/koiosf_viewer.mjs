@@ -327,7 +327,7 @@ function ScrCommunityMadeVisible () {
 }
 
 function SlackJoin() {
-	window.open("https://discord.gg/Rk7fWvz6", '_blank');
+	window.open("https://discord.com/invite/SBpZhEDHFR", '_blank');
 }
 
 async function asyncloaded() {
