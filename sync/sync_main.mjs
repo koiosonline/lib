@@ -9,6 +9,7 @@ var globaldb;
 var globalipfs;
 var globaladr="unknown"
 const globalserverid='QmaXQNNLvMo6vNYuwxD86AxNx757FoUJ3qaDoQ58PY2bxz' 
+const globalserverid2="12D3KooWPRLZ79rpVqfobJBWRrTp1TPiXBgaFHr7Zt56gYgDqGpJ"
 //var descriptions=new DomList('descriptioncontainer','scr_offerings');     
 var alloptionsset={}
 var selectlist1=new DomList('selectblock',"selectlist1",'scr_addopportunity ');
@@ -821,14 +822,14 @@ async function Peers() {
         var peers=await globalipfs.swarm.peers()
        for (var i=0;i<peers.length;i++) {        
             var adr=peers[i].addr.toString();
-       //     console.log(adr);
+            console.log(adr);
             if (adr.includes(globalserverid)) {
                 fconnectedtoserver=true;
                 break;
             }
        } 
     }
-   //console.log(`Connected to server: ${fconnectedtoserver}`);
+   console.log(`Connected to server: ${fconnectedtoserver}`);
     getElement("connected").innerHTML=fconnectedtoserver?"connected:yes":"connected:no";
    
 }
@@ -837,6 +838,11 @@ async function Connect() {
     const con='/dns4/gpersoon.com/tcp/4004/wss/p2p/'+globalserverid;
     log(`Connect ${con}`)
     await globalipfs.swarm.connect(con).catch(console.log); // put the address of the create_db.js here
+    
+    const con2='/ip4/82.95.0.195/tcp/4001/p2p/'+globalserverid2;
+    log(`Connect ${con2}`)
+    await globalipfs.swarm.connect(con2).catch(console.log); // put the address of the create_db.js here
+    	
     await Peers();
 }
 
@@ -844,6 +850,11 @@ async function Disconnect() {
     const con='/dns4/gpersoon.com/tcp/4004/wss/p2p/'+globalserverid;
     log(`Disconnect ${con}`)
     await globalipfs.swarm.disconnect(con,{timeout:5000}).catch(console.log); // put the address of the create_db.js here
+	
+    const con2='/ip4/82.95.0.195/tcp/4001/p2p/'+globalserverid2;
+    log(`Connect ${con2}`)
+    await globalipfs.swarm.disconnect(con2,{timeout:5000}).catch(console.log); // put the address of the create_db.js here    	
+	
     await Peers();
 }
 

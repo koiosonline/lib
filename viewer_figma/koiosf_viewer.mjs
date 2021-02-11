@@ -21,6 +21,7 @@ import {} from './koiosf_quiz.mjs';
 import {} from './koiosf_badges.mjs';
 import {currentlang, setDarkmode} from './koiosf_settings.mjs';
 import {} from './koiosf_leaderboard.mjs';
+import { setElementVal } from '../lib/koiosf_util.mjs';
 
 var globalplayer=0;
 export var currentvidinfo;
@@ -337,6 +338,8 @@ async function asyncloaded() {
     LinkClickButton("back",stopVideo,"scr_viewer");
     getElement("StartButton").addEventListener('animatedclick',startVideo)
     subscribe('videocued', x=>{HideButton("StartButton",false);})
+
+    setElementVal("__label", "Join KOIOS on Discord", "slackjoin");
 
     var videofield=getElement("videofield");
     videofield.addEventListener('click', x=>{console.log("videofield click");if (!IsVideoPaused()) stopVideo();});
