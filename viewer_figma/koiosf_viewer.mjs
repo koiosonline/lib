@@ -328,7 +328,7 @@ function ScrCommunityMadeVisible () {
 }
 
 function SlackJoin() {
-	window.open("https://discord.com/invite/SBpZhEDHFR", '_blank');
+	window.open(globalcommunityinvite, '_blank');
 }
 
 async function asyncloaded() {
