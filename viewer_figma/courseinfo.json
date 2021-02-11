@@ -12,8 +12,8 @@
 		"goal": "testing",
 		"start": "now",
 		"image": "https://ipfs.io/ipfs/QmcKXFH1VVYUL7FjKZX6de31wgrNLk52DnK77e4FRwXVLR",
-		"community":"https://koiosonline.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosonline/shared_invite/enQtNjE0MjAyNzMyODY4LTFlYWIzODRkNTI2ZWExOWM0NGNmMjFjNTU1YzFmZGExOWUzY2EzYTg4NDMwNDVhOTBkMGU0MTFkNzJkN2I5MWM"                
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR"                 
 	},
 	"howtouse01": {
 		"course": "How to use the KOIOS platform",
@@ -23,8 +23,8 @@
 		"duration": "636",
 		"slides": "QmUmFccDF5h4kouHpD5gRJA1jdux6Rm8LDTe92i59NHjzQ",
 		"image": "https://ipfs.io/ipfs/QmYP1v6mchB9uJZvHtfi3hgbCrc8QHP1z6aB8FnR716kDR",
-		"community":"https://koiosonline.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosonline/shared_invite/enQtNjE0MjAyNzMyODY4LTFlYWIzODRkNTI2ZWExOWM0NGNmMjFjNTU1YzFmZGExOWUzY2EzYTg4NDMwNDVhOTBkMGU0MTFkNzJkN2I5MWM"
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" 
 	},
 	"tdfa01": {
 		"course": "Trading Digital &amp; Financial Assets",
@@ -36,8 +36,8 @@
 		"slides": "QmRGWvHn3wksXEf2s8Cod3Kw9TWzDXb84MWAZEADPKwz3A",								
 		"quizinfo": "QmXsnYGKXxrAKiZKQ6AHtiwJq19xQoav9ea5Fs6tmB7xtU",
 		"image": "https://ipfs.io/ipfs/QmXG1pdYUovDFZ9jLQx4XqPhg1MYU6ghB1zyVT1jNutZYy",
-		"community":"https://tdfaslack.slack.com",
-		"communityinvite":"https://join.slack.com/t/tdfaslack/shared_invite/zt-f8ghb2gg-e8bUiNK~T1zU6vNvfseIdA"
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" 
 	},
 	"bclevel01": {
 		"course": "Mastering Blockchain",
@@ -45,16 +45,16 @@
 		"level": "1",                
 		"videoinfo": "QmT9vZ78djiZrQixsfTjWqDgbMZs7m6crrUj1hqgYLnY2E",
 		"duration": "21333",			
-		"slides":"QmU7k6AutkwJiyPKZCpZRYq238VY7TK6QwcpXHTp3LRRGN",
+		"slides":"QmPJdc9QvhLvswjmWmUe7ABqiMUPc3EPdMqi4DJ5nvsPn1",
 		"quizinfo": "QmVL4y6AQbyegHPFhQiVqZJxg3TiTSDyovRfnNnVvAH8Mf",
 		"contributer": "jordi",
 		"subtitle": "An extensive introduction to Blockchain Technology.",
-		"description": "This introduction course will take you through the absolute basics of blockchain technology. After completion you will understand theimportance of blockchain technology and have a small grasp of how a blockchainworks. A course for everyone.",
+		"description": "This introduction course will take you through the absolute basics of blockchain technology. After completion you will understand the importance of blockchain technology and have a small grasp of how a blockchainworks. A course for everyone.",
 		"goal": "Ledger technology / Bitcoin / Smart contracts",
 		"start": "31-8-2020",
 		"image": "https://ipfs.io/ipfs/QmcR3DR5wZWBUaJzpbkhV7Nspne1dJ75P4eHzXrtgbniRE",
-		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"                
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR"                 
 	},	
 	"bclevel02": {
 		"course": "Mastering Blockchain",
@@ -66,12 +66,12 @@
 		"quizinfo": "Qmb1Vfh429KeYfFdxsiKsTXJsTk97z8U4PZJ7PENM9hrU4",
 		"contributer": "jordi",
 		"subtitle": "The second level. Let's dive in deeper.",
-		"description": "After completing the introduction course, you are ready todive a bit deeper into the technology. You'll learn about different blockchainsand what makes them different from one another. You'll also get a deeperunderstanding of the bitcoin protocol.",
+		"description": "After completing the introduction course, you are ready to dive a bit deeper into the technology. You'll learn about different blockchains and what makes them different from one another. You'll also get a deeperunderstanding of the bitcoin protocol.",
 		"goal": "Bitcoin deep dive / Ethereum  Smart contracts",
 		"start": "31-8-2020",
 		"image": "https://ipfs.io/ipfs/QmYPt618XA9KHnLsfTwXPBsgvt8YJi8Tp4amysDUVCg1zn",
-		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ",
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" ,
 		"token": "Titan"
 	},    
 	"bclevel03": {
@@ -87,8 +87,8 @@
 		"description": "Welcome to the third part of the KOIOS Blockchain Technology course. This is the so called 'economic deep dive', where we will focus on economics in relation to Blockchain Technology.",
 		"goal": "More advanced blockchain stuff",
 		"image": "https://ipfs.io/ipfs/QmfAh2yJyHN9pPP93Sm58QrqSnVsw2MyVXQz6vCcgZRZzU",
-		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"		
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" 		
 	},
 	"datascience01": {
 		"course": "Datascience & Python",
@@ -120,8 +120,8 @@
         "duration": "10425",
 		"slides": "QmagLJr432F86K6YEy4yzWHb499cdsyAyyE1jrVn1ctHvN",				
 		"quizinfo": "QmSYWwA3Arn4rm7vQYBTYpCTx3CiM84ipg9BozNyES8tCv",
-		"community":"https://koiosonline.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"                
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR"                
 	},
 	"programmingdapps01": {   
 		"course": "Programming DAPPS",
@@ -137,8 +137,8 @@
 		"goal": "Solidity IPFS",
 		"start": "now",
 		"image": "http://web3examples.com/logo.png",        
-		"community":"https://koiosblockcha-ma69869.slack.com",
-		"communityinvite":"https://join.slack.com/t/koiosblockcha-ma69869/shared_invite/zt-i2blvdtj-UODbUG_O1UgjKaIVyjWgHQ"
+		"community":"https://discord.com/invite/SBpZhEDHFR" ,
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" 
 		
 	}
 }
