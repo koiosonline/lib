@@ -261,6 +261,7 @@ async function ScrDetailMadeVisible(event) {
         var mask=["course","courselevel","level","contributer","level","subtitle","description","goal","start","duration","contributerdescription",["image","courseicon"]]; 
         ForAllElements(data, mask, (id,val) => { setElementVal(id,val,getElement("scr_detail")) }) // find domid object with same name and copy value
     }
+    console.log(courseid);
 }
 
 function SelectCourse(event) {
