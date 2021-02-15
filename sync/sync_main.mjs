@@ -10,6 +10,7 @@ var globalipfs;
 var globaladr="unknown"
 const globalserverid='QmaXQNNLvMo6vNYuwxD86AxNx757FoUJ3qaDoQ58PY2bxz' 
 const globalserverid2="12D3KooWPRLZ79rpVqfobJBWRrTp1TPiXBgaFHr7Zt56gYgDqGpJ"
+
 //var descriptions=new DomList('descriptioncontainer','scr_offerings');     
 var alloptionsset={}
 var selectlist1=new DomList('selectblock',"selectlist1",'scr_addopportunity ');
@@ -842,7 +843,7 @@ async function Connect() {
     const con2='/ip4/82.95.0.195/tcp/4001/p2p/'+globalserverid2;
     log(`Connect ${con2}`)
     await globalipfs.swarm.connect(con2).catch(console.log); // put the address of the create_db.js here
-    	
+
     await Peers();
 }
 

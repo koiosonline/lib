@@ -8,7 +8,7 @@
 <script type="module">
 // https://gpersoon.com/koios/lib/lib/checkipfs.html
 console.log("Start");
-import {GetJson,GetJsonIPFS,FetchIPFS,GetImageIPFS,setElementVal,sleep} from '../lib/koiosf_util.mjs';
+import {GetJson,GetJsonIPFS,FetchIPFS,GetImageIPFS,setElementVal,sleep,FetchIPFSTxt,FetchIPFSUint8Array} from '../lib/koiosf_util.mjs';
 
 async function init() {
 	var courseinfo=await GetJson("https://gpersoon.com/koios/lib/viewer_figma/courseinfo.json")
@@ -16,10 +16,12 @@ async function init() {
 	log("Done");
 }
 
+var seenbefore=[];
+
 var counter=0;
 async function recurse(thisid,obj,prefix) {
-//await sleep(300); // don't overload chrome
-	//log(`${prefix} ${thisid} ${JSON.stringify(obj)} ${typeof(obj)}`);
+await sleep(300); // don't overload chrome
+	log(`${prefix} ${thisid} ${JSON.stringify(obj)} ${typeof(obj)}`);
 	if (!obj) return;
 	switch (typeof(obj)) {
 		case "object":
@@ -49,20 +51,30 @@ async function recurse(thisid,obj,prefix) {
 }
 
 async function CheckChild(obj,prefix) {
+
+if (seenbefore[obj]) return
+seenbefore[obj]=true;
+
 //await sleep(300); // don't overload chrome
 	counter++;
 	setElementVal("loaded",counter)
-	try { var child=await FetchIPFS(obj); } catch (error) { log(error); }
+    console.log(`Looking for : ${obj}`)
+ //   var resultarray=await FetchIPFSUint8Array(obj)
+  //  console.log(resultarray);    
+   // return;
+    
+	try { var txt=await FetchIPFSTxt(obj); } catch (error) { log(`Error in FetchIPFSTxt :${obj} ${error}`); return;}
 	//console.log(child);
-	if (!child || !child.ok) { 
+	if (!txt) { //  || !child.ok) { 
 		log(`can't find ${obj}`);return;  
 	}
-	
-	var txt=await child.text();
+	console.log(`found: ${obj} length ${txt.length}`)
+	//var txt=await child.text();
 	var firstpart=txt.replace(/\r\n/g,"").replace(/ \t/g,"").substring(1, 50)
-	//log(`${prefix} content: ${firstpart}`); // replace all newlines);
+	
 	
 	if (firstpart.includes("{")) {
+        log(`${prefix} content: ${firstpart}`); // replace all newlines);
 		try { var json=await GetJsonIPFS(obj); } catch (error) { log(error); }					
 		await recurse(obj,json,prefix+"   ");
 	}
