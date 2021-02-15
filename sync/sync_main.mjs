@@ -838,7 +838,7 @@ async function Peers() {
 async function Connect() {
     const con='/dns4/gpersoon.com/tcp/4004/wss/p2p/'+globalserverid;
     log(`Connect ${con}`)
-    await globalipfs.swarm.connect(con).catch(console.log); // put the address of the create_db.js here
+    /*await */ globalipfs.swarm.connect(con).catch(console.log); // put the address of the create_db.js here
     
     const con2='/dns4/srv1.web3examples.com/tcp/4002/wss/p2p/'+globalserverid2;
     log(`Connect ${con2}`)
@@ -850,7 +850,7 @@ async function Connect() {
 async function Disconnect() {
     const con='/dns4/gpersoon.com/tcp/4004/wss/p2p/'+globalserverid;
     log(`Disconnect ${con}`)
-    await globalipfs.swarm.disconnect(con,{timeout:5000}).catch(console.log); // put the address of the create_db.js here
+    /*await */globalipfs.swarm.disconnect(con,{timeout:5000}).catch(console.log); // put the address of the create_db.js here
 	
     
     
