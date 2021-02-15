@@ -81,6 +81,10 @@ async function SwitchTo(domid,divtype) {
     var main=domid.firstChild;
    // console.log(main)
     
+    
+    
+    
+    
     if (divtype=="") {
         var found=main;
     } else {  
@@ -88,8 +92,21 @@ async function SwitchTo(domid,divtype) {
     //    console.log(`SwitchTo ${btnclass}${divtype}`)    
         var foundlist=domid.getElementsByClassName(`${btnclass}${divtype}`)
       //  console.log(foundlist);
-        if (foundlist.length==0)
-            found=main; // otherwise nothing is visible
+        if (foundlist.length==0) {
+            var key="key"
+            switch (divtype) {
+              case "--hover": key="State=Hover,";break;
+              case "--active": key="State=Active,";break;
+              case "--focus": key="State=Focus,";break;
+              case "--disabled": key="State=Disabled,";break;
+          }    
+          foundlist=domid.getElementsByClassName(key)
+            
+           if (foundlist.length==0)            
+              found=main; // otherwise nothing is visible
+           else
+              found=foundlist[0]    
+        }
          else 
             found=foundlist[0]    
         
