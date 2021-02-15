@@ -840,7 +840,7 @@ async function Connect() {
     log(`Connect ${con}`)
     await globalipfs.swarm.connect(con).catch(console.log); // put the address of the create_db.js here
     
-    const con2='/dns4/srv1.web3examples.com/tcp/wss/p2p/'+globalserverid2;
+    const con2='/dns4/srv1.web3examples.com/tcp/4002/wss/p2p/'+globalserverid2;
     log(`Connect ${con2}`)
     await globalipfs.swarm.connect(con2).catch(console.log); // put the address of the create_db.js here
 
@@ -855,7 +855,7 @@ async function Disconnect() {
     
     
     
-    const con2='/dns4/srv1.web3examples.com/tcp/wss/p2p/'+globalserverid2;
+    const con2='/dns4/srv1.web3examples.com/tcp/4002/wss/p2p/'+globalserverid2;
     log(`Connect ${con2}`)
     await globalipfs.swarm.disconnect(con2,{timeout:5000}).catch(console.log); // put the address of the create_db.js here    	
 	
