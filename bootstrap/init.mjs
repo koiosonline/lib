@@ -47,7 +47,7 @@ function MakeBlob(html,fjavascript) {
 // var ipfsurl="https://ipfs.infura.io/ipfs/" //metamask mobile prefers this (otherwise cors error) 2020-9-28 ==> change in infura Clear-Site-Data header ==> switch to
 // var ipfsurl="https://cloudflare-ipfs.com/ipfs/" // sometimes captha
 //var ipfsurl="https://gateway.ipfs.io/ipfs/"
-var ="https://srv1.web3examples.com:8081/ipfs/"
+var ipfsurl="https://srv1.web3examples.com:8081/ipfs/"
 
 async function start() { 
 	console.log("start");
