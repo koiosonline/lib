@@ -56,7 +56,7 @@ module.exports = async function(deployer) {
 		}
 */		
 	}
-error
+console.log("end");
 }  
   
 const BN = web3.utils.BN
