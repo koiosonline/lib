@@ -54,7 +54,8 @@
 		"start": "31-8-2020",
 		"image": "https://ipfs.io/ipfs/QmcR3DR5wZWBUaJzpbkhV7Nspne1dJ75P4eHzXrtgbniRE",
 		"community":"https://discord.com/invite/SBpZhEDHFR" ,
-		"communityinvite":"https://discord.com/invite/SBpZhEDHFR"                 
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR",
+        "token": "T1tan"
 	},	
 	"bclevel02": {
 		"course": "Mastering Blockchain",
@@ -72,7 +73,7 @@
 		"image": "https://ipfs.io/ipfs/QmYPt618XA9KHnLsfTwXPBsgvt8YJi8Tp4amysDUVCg1zn",
 		"community":"https://discord.com/invite/SBpZhEDHFR" ,
 		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" ,
-		"token": "Titan"
+		"token": "T1tan"
 	},    
 	"bclevel03": {
 		"course": "Mastering Blockchain",
@@ -88,7 +89,8 @@
 		"goal": "More advanced blockchain stuff",
 		"image": "https://ipfs.io/ipfs/QmfAh2yJyHN9pPP93Sm58QrqSnVsw2MyVXQz6vCcgZRZzU",
 		"community":"https://discord.com/invite/SBpZhEDHFR" ,
-		"communityinvite":"https://discord.com/invite/SBpZhEDHFR" 		
+		"communityinvite":"https://discord.com/invite/SBpZhEDHFR",
+        "token": "T1tan"
 	},
 	"datascience01": {
 		"course": "Datascience & Python",
