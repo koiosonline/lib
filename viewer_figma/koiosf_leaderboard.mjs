@@ -74,7 +74,7 @@ async function ReloadTokens() {
 
 async function getTitanTokenCount() {
     var tokenname=await GetCourseInfo("token")
-    if (!tokenname) tokenname="Titan" // default token
+    if (!tokenname) tokenname="T1tan" // default token
     console.log(`Current token=${tokenname}`)
     var totalTokens = await contracttokenfactory.methods.NrTokens().call();
     var addresspromises = new Array;
