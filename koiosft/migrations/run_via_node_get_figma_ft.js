@@ -32,8 +32,9 @@ console.log(documentpart)
     cid=await MakeImage(ipfs, "KoiosToken",documentpart); 	  list.push({name:"Koios",cid:cid} );  
     cid=await MakeImage(ipfs, "TitanToken",documentpart,"PD20B"); 	   list.push({name:"TitanPD20B",cid:cid} );
     cid=await MakeImage(ipfs, "TitanToken",documentpart,"L320B"); 	   list.push({name:"TitanL320B",cid:cid} );
-*/    
     cid=await MakeImage(ipfs, "TitanToken",documentpart,"TD20B"); 	   list.push({name:"TitanTD20B",cid:cid} );
+*/  
+  cid=await MakeImage(ipfs, "TitanToken",documentpart,"T1tan"); 	   list.push({name:"T1tan",cid:cid} );
 	
     console.log(list);
 	await fs2.writeFile('tokens.json', JSON.stringify(list),console.log)

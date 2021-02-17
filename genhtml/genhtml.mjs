@@ -189,16 +189,19 @@ document.getElementById("SaveOnIpfs").innerHTML=""
     //return `http://www.gpersoon.com:8080/ipfs/${result}`;
     //return `https://ipfs.io/ipfs/${result}`;
 }
-function FindObject(objname,figdata) {
+function FindObject(objname,figdata,fmatchfullname) {
 //console.log(figdata);
-
-    var firstpart = figdata.name.split(" ")[0]
+    var firstpart
+    if (fmatchfullname)  // usefull for componentsets
+        firstpart=figdata.name
+    else 
+        firstpart = figdata.name.split(" ")[0]
     if (firstpart == objname || figdata.id==objname) 
         return figdata;
     var children=figdata.children;
     if (children)
         for (var i=0;i<children.length;i++) {
-            var child=FindObject(objname,children[i] )
+            var child=FindObject(objname,children[i],fmatchfullname )
             if (child) return child;
         }
     return undefined; // not found        
@@ -492,10 +495,11 @@ function GetAtParam(figdata,name) {
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
-async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,buttonlevel,fpartofflex,pb) { // pb is (optional) parent boundingbox
+async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,buttonlevel,fpartofflex,pb,fhide) { // pb is (optional) parent boundingbox
         var htmlobjects=[]                        
-        console.log(`Processing ${figdata.name} with ${figdata.children ? figdata.children.length : 0} children`);    //Type:${figdata.type}
+        console.log(`Recurse ${figdata.name} with ${figdata.children ? figdata.children.length : 0} children fpartofflex: ${fpartofflex} fhide:${fhide}`);    //Type:${figdata.type}
         console.log(figdata);
+        console.log(pb)
         
 		//log(`Recurse ${figdata.name}`);
 		
@@ -509,7 +513,7 @@ async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,button
         var fsvg=    GetAtParam(figdata,"@svg")!=undefined            // console.log(`fsvg=${fsvg}`)
 		var fpng=    GetAtParam(figdata,"@png")!=undefined            // console.log(`fsvg=${fsvg}`)
         var faspect= GetAtParam(figdata,"@aspect")!=undefined      //  console.log(`faspect=${faspect}`)
-        var fhidden= GetAtParam(figdata,"@hidden")!=undefined      //  console.log(`faspect=${faspect}`)
+        var fhidden= GetAtParam(figdata,"@hidden")!=undefined  || fhide    //  console.log(`faspect=${faspect}`)
         
         var click=GetAtParam(figdata,"@click")!=undefined
         var dest=GetAtParam(figdata,"@dest")
@@ -610,6 +614,10 @@ async function recurse(figdata,figmadocument,documentid,token,fpartofgrid,button
 		console.log(`makerelative=${makerelative}`);
        dimensions +=`position: ${figdata.isFixed?"fixed":makerelative?"relative":"absolute"};`;      // for grid with auto layout, relative position is neccesary          
 console.log(dimensions)			     
+
+
+// later on fhidden => display="none";  // this is for the other representations of buttons
+        console.log(`display: ${display}`)
 
             if (!pb) {
 				if (!buttonlevel)
@@ -776,7 +784,7 @@ console.log(dimensions)
                 }
                 
                 if (figdata.layoutMode) { // autolayout
-                    
+                    console.log(`autolayout: ${figdata.layoutMode}`)
                     
                     display="flex"
                     
@@ -1087,9 +1095,22 @@ function ConvertColor(color) {
                 
         //console.log(insrtstyle);
         
+        
+        // for the surroundingdiv: use the location parameters, but don't use the layout parameters
+        
         if (surroundingdiv) {
-            var strstyle2 = strstyle + dimensions;
-            var insrtstyle2=strstyle2?`style="${strstyle2}"`:""
+            
+            
+             
+            
+            var strstyle2 = dimensions;
+            if (display)        
+                strstyle2 +=`display:${display};`; // also include the display
+            // var insrtstyle2=strstyle2?`style="${strstyle2}"`:""
+            var insrtstyle2=strstyle2?`style="${strstyle2}"`:"" // only insert the dimensions info
+            
+            console.log(`surroundingdiv ${surroundingdiv} ${insrtstyle2} ${strstyle}`);
+            
             htmlobjects.push( `<div class="${classname}" ${insrtstyle2} class="surround" ${insdata} style="${surroundingdiv};border-style:solid;border-width:1px;border-color:red;" ${eventhandlers}>` ); // width:100%;height:100%;
             dimensions=""; // dimensions are part of surroundingdiv
             
@@ -1151,10 +1172,10 @@ function ConvertColor(color) {
  
         if (fthisisabutton) { // this is a button so also get all other instance of a button 
 		console.log(`Retrieving other buttons of  ${figdata.name}-----------------------------------------------------------`)
-           htmlobjects.push(GetOtherButton(figdata.name,"--hover"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--active"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--focus"))
-           htmlobjects.push(GetOtherButton(figdata.name,"--disabled"))
+           htmlobjects.push(GetOtherButton(figdata.name,"--hover",figdata.componentId))
+           htmlobjects.push(GetOtherButton(figdata.name,"--active",figdata.componentId))
+           htmlobjects.push(GetOtherButton(figdata.name,"--focus",figdata.componentId))
+           htmlobjects.push(GetOtherButton(figdata.name,"--disabled",figdata.componentId))
 		   console.log(`End retrieving other buttons of  ${figdata.name}-----------------------------------------------------------`)
         }
   
@@ -1175,20 +1196,51 @@ function ConvertColor(color) {
         return htmlobjects;
        
 
-    async function GetOtherButton(name,subselect) {    
+    async function GetOtherButton(name,subselect,componentId) {    
         var firstpart=name.split(" ")[0]
         //console.log(firstpart);
         if (!globalcomponentsdocument) return ""
         var fo=FindObject(`${firstpart}${subselect}`,globalcomponentsdocument)
-        if (!fo) return ""
-        var button=await recurse(fo,figmadocument,globalcomponentsid,token,fgrid,1,fflextopass,undefined) // no bounding=> hidden &max width     // get from componentsid!!!       
+        if (fo) {
+            var button=await recurse(fo,figmadocument,globalcomponentsid,token,fgrid,1,fflextopass,figdata.absoluteBoundingBox,true) // no bounding=> hidden &max width     // get from componentsid!!!       
+            return button// this is the original version
+        }
       //  console.log("button info is:")
       //  console.log(button);
-        return button;
+      
+      
+      
+      var key="key"
+      switch (subselect) {
+          case "--hover": key="Hover";break;
+          case "--active": key="Active";break;
+          case "--focus": key="Focus";break;
+          case "--disabled": key="Disabled";break;
+      }     
+
+if (!globalcomponentindex[componentId]) {
+     console.log(`Can't find ${componentId} in globalcomponentindex`)
+     return "";
+}
+      
+        var buttonname=globalcomponentindex[componentId].name
+         buttonname=buttonname.replace("Default",key);
+        console.log(subselect," ",key," ",buttonname)
+      
+    var fo=FindObject(firstpart,globalcomponentsdocument)
+    console.log(fo)
+    if (!fo) return
+    var fo2=FindObject(buttonname,fo,true)
+    if (!fo2) return
+    console.log(fo2)
+      var button=await recurse(fo2,figmadocument,globalcomponentsid,token,fgrid,1,fflextopass,figdata.absoluteBoundingBox,true) // no bounding=> hidden &max width     // get from componentsid!!!       
+      return button
+      
     }
 
+    
        
-    }    
+}    
 
 
 async function start() {
@@ -1220,6 +1272,7 @@ async function start() {
     if (documentpart.err) {log(`Error retrieving figma info: ${documentpart.status} ${documentpart.err} `);return;}
     console.log(documentpart);
     globalfigmadocument=documentpart.document;
+    globalcomponentindex=documentpart.components;
     console.log(globalfigmadocument);
     //log(`Found page: ${globalfigmadocument.name?globalfigmadocument.name:""} ${globalfigmadocument.id}`);    
     var fo=FindObject(globalobjname,globalfigmadocument)
@@ -1252,6 +1305,7 @@ async function start() {
 // Global variables
 var ipfscounter=0
 var globalpinlocation;
+var globalcomponentindex;
 let globalconnectto=[]
 let imagelist=[]
 var ipfs; 
