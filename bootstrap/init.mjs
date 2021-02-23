@@ -84,7 +84,7 @@ async function start() {
 	}
 	console.log(`cid ${cid}`)
 	if (cid) {
-		var modulesource=(await (await fetch(ipfsurl+cid)).text()).trim();
+		var modulesource=(await (await FetchIPFS(/*ipfsurl+*/cid)).text()).trim();
 		var tag="//--script--"
 		var n = modulesource.indexOf(tag);
 		if (n <0 ) { console.error("Can't find tag");return;} 
@@ -117,6 +117,82 @@ async function start() {
 }
 
 start();
+
+
+let ipfsproviders=[ 
+    "https://srv1.web3examples.com:8081/ipfs",
+    "https://ipfs.io/ipfs",
+ //   "https://gateway.ipfs.io/ipfs"
+]; 
+
+async function FetchIPFS(cid) {
+    console.log("In FetchIPFS");
+    console.log(cid)
+    if (!cid) return undefined;		
+	//cid=stripipfsprefix(cid)
+    var urlarray=[];
+    for (var i=0;i<ipfsproviders.length;i++) {
+        var url=GetCidViaIpfsProvider(cid,i);
+		urlarray.push(url)
+	}
+    try { var fetchresult=await FetchMultipleWithTimeout(urlarray,150000)    } catch(error) {console.log(error);}
+    if (fetchresult && fetchresult.ok) return fetchresult; // found a working version     			
+	return undefined;
+}
+
+function GetCidViaIpfsProvider(cid,nr) {
+    var url=`${ipfsproviders[nr]}/${cid}`;    
+    return url;  
+}      
+
+
+var statusarray=[]
+var fetchcounter=0;
+ async function FetchWithTimeout(url) {
+     console.log("In FetchWithTimeout");
+     console.log(url);
+	const controller = new AbortController()
+	var index = fetchcounter++
+	statusarray[index]=url
+	var fetchresult;
+	const timeoutId = setTimeout(() => { console.log(`timeout ${url}`);controller.abort();}, 150000)
+	try { 
+		fetchresult=await fetch(url,{ /*signal: controller.signal,*/ cache: 'force-cache' });   // /index.json
+	} catch (error) {console.log(`Fetch error ${url} ${error}`); }
+
+	clearTimeout(timeoutId)
+	
+	if (!fetchresult || !fetchresult.ok) {
+		statusarray[index]+=" not loaded"
+        return undefined;    
+    }
+	
+	statusarray[index] = ""
+	return fetchresult;
+}	
+ 
+ async function FetchMultipleWithTimeout(urlarray,timeout) {   
+    var promisearray=[]
+    var controllerarray=[]
+    console.log("In FetchMultipleWithTimeout")
+console.log(urlarray)
+    for (const item of urlarray) {
+        const controller = new AbortController()
+        controllerarray.push(controller)        
+        try {var prom=fetch(item,{ /*signal: controller.signal, */cache: 'force-cache' }).catch( /*console.log*/ ) } catch(error) {console.log(error); }
+        promisearray.push(prom)        
+    }    
+
+    promisearray.push(sleep(timeout).catch(console.log))
+    var fetchresult=await Promise.race(promisearray).catch(console.log);
+    for (let i=0;i<urlarray.length;i++) {         
+        var checkready=await Promise.race([promisearray[i],undefined]).catch(console.log);           
+        if (!checkready)
+            controllerarray[i].abort()
+    }
+    return fetchresult;
+}
+
 
 
 /* code in webflow, in the Inside <head> tag:
