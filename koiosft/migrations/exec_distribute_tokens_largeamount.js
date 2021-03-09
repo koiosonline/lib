@@ -27,13 +27,13 @@ module.exports = async function(deployer) {
 	for (var i=0;i<NrTokens;i++) {
 		name=await ERC20TokenContract[i].name()		
 		console.log(`Processing contract ${name}`)
-        if (!name.includes("T1tan")) continue;
+        if (!name.includes("Titan")) continue;
 		decimals=await ERC20TokenContract[i].decimals()	
 		//console.log(`Address token ${tokenaddress} name:${name} decimals:${decimals}`)	
 
 		for (var item of toarrayamount)  {	
             var dest=item[0]            
-            if (name=="T1tan") await MintandProcess(tokenaddress,item[1] ,ERC20TokenContract[i],dest,acts[0],decimals)
+            if (name=="Titan") await MintandProcess(tokenaddress,item[1] ,ERC20TokenContract[i],dest,acts[0],decimals)
             //if (name.includes("Koios")) await MintandProcess(tokenaddress,item[2] ,ERC20TokenContract[i],dest,acts[0],decimals)
                 
             
