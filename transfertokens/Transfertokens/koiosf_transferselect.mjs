@@ -1,4 +1,4 @@
-import {LinkClickButton, LinkVisible} from '../../lib/koiosf_util.mjs';
+import {LinkClickButton, LinkVisible, setElementVal} from '../../lib/koiosf_util.mjs';
 import {updateDisplayedToken} from '../Transfertokens/koiosf_transfertokens.mjs';
 
 export var SelectedToken;
@@ -9,7 +9,8 @@ async function asyncloaded() {
     LinkVisible("scr_select"  ,ScrSelectMadeVisible);
     LinkClickButton("TitanToken",setClassicTitan);
     LinkClickButton("TitanPD20B", setTitanPD20B);
-    LinkClickButton("TitanL320B", setTitanL320B);
+    LinkClickButton("TitanL320B", setTitanT1tan);
+    setElementVal("__label", "T1tan", "TitanL320B")
 }
 
 async function ScrSelectMadeVisible() {
@@ -28,8 +29,8 @@ export function setTitanPD20B(){
     updateDisplayedToken();
 }
 
-export function setTitanL320B(){
-	SelectedToken="TitanL320B";
+export function setTitanT1tan(){
+	SelectedToken="T1tan";
     localStorage.setItem("SelectedToken", SelectedToken);
     updateDisplayedToken();
 }
