@@ -1,0 +1,74 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+#    network: ganache
+
+################################################## Titan contract on Rinkeby
+  - kind: ethereum/contract
+    name: ERC20Token2
+    network: rinkeby
+    source:
+      address: "0xc571A04F4332093364ce38559f313bA2a766FbB9"
+      abi: ERC20Token
+      startBlock: 7155926
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: ERC20Token
+          file: ./abis/ERC20Token.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+
+################################################## TitanL320B contract on Rinkeby
+  - kind: ethereum/contract
+    name: TitanL320B
+    network: rinkeby
+    source:
+      address: "0x354a9168c0084005f31306C08c8700949429e8ed"
+      abi: ERC20Token
+      startBlock: 7530054
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: ERC20Token
+          file: ./abis/ERC20Token.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+################################################## T1tan contract on Rinkeby
+  - kind: ethereum/contract
+    name: T1tan
+    network: rinkeby
+    source:
+      address: "0x7f5BBa771806f18C32F3F51F403d0b7294A8E5Ec"
+      abi: ERC20Token
+      startBlock: 8089014
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - User
+      abis:
+        - name: ERC20Token
+          file: ./abis/ERC20Token.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
+
+
