@@ -17,7 +17,7 @@ module.exports = async function(deployer) {
 	for (var i=0;i<NrTokens;i++) {
 		name=await ERC20TokenContract[i].name()		
 		//console.log(`Processing contract ${name}`)
-        if (! (name=="Titan")) continue;
+        //if (! (name=="Titan")) continue;
 		console.log(`Name: ${name} address:${ERC20TokenContract[i].address}`);
 
 	}
