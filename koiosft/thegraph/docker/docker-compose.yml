@@ -17,8 +17,8 @@ services:
       postgres_pass: let-me-in
       postgres_db: graph-node
       ipfs: 'ipfs:5001'
-      #ethereum: 'rinkeby:https://rinkeby.infura.io/v3/${INFURAKEY}
-      ethereum: 'ganache:http://host.docker.internal:7545'
+      ethereum: 'rinkeby:https://rinkeby.infura.io/v3/${INFURAKEY}'
+      #ethereum: 'ganache:http://host.docker.internal:7545'
       RUST_LOG: info
   ipfs:
     image: ipfs/go-ipfs:v0.4.23
