@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 const fs2 = require('fs');
-const token = fs2.readFileSync(".figma").toString().trim();
-const documentid = fs2.readFileSync(".figmadocument").toString().trim();
+const token = fs2.readFileSync("c:\keys\.figma").toString().trim();
+const documentid = fs2.readFileSync("c:\keys\.figmadocument").toString().trim();
 
 
 var list=[];
