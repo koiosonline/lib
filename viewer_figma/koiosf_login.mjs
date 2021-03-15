@@ -128,7 +128,7 @@ async function fetchAccountData() {
 	// Load chain information over an HTTP API
 	var chainData=`Chain: ${chainId}`
 	try {
-		chainData = (await EvmChains.getChain(chainId)).name;    
+		chainData = (await getChain(chainId)).name;    
 	} catch(err) { console.log(err); } // but still continue
 	var domid=getElement("chain");if (domid) domid.textContent = chainData;
 	
