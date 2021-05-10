@@ -68,4 +68,13 @@ export class User extends Entity {
   set erc20Symbol(value: string) {
     this.set("erc20Symbol", Value.fromString(value));
   }
+
+  get contentURI(): string {
+    let value = this.get("contentURI");
+    return value.toString();
+  }
+
+  set contentURI(value: string) {
+    this.set("contentURI", Value.fromString(value));
+  }
 }
