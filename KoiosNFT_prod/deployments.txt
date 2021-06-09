@@ -1,0 +1,104 @@
+via account: 0xcEd70b033c7D7a3a3Cae3751F3497fC32E16E8BB
+
+0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB  (mumbai)
+
+(avalanche)
+
+0xA5f800d8D60BF689258fB4D2Ca6e2810556d3B8F  (via 0x8e2A89fF2F45ed7f8C8506f846200D671e2f176f)
+
+
+
+
+
+
+ avalanche 721
+ 0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB
+ 
+ 
+ 
+ https://cchain.explorer.avax.network/address/0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB/transactions
+ https://cchain.explorer.avax.network/tokens/0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB/token-holders
+ 
+ inventory werkt niet
+ 
+ 
+ (hier zijn de plaatjes te zien:)
+ 
+ https://cchain.explorer.avax.network/tokens/0x0540E4EE0C5CdBA347C2f0E011ACF8651bB70Eb9/inventory
+ https://cryptoseals.art/api/seal/9227
+ bevat ook image in de json en tevens:
+ 	"file": "/ipfs/QmQxoLjj9eohvA8GDUcHuZmtBqaqraX9RkSDp8Q6J1E9jp",
+	"image": "https://ipfs.infura.io/ipfs/QmQxoLjj9eohvA8GDUcHuZmtBqaqraX9RkSDp8Q6J1E9jp",
+	"ipfs": "https://gateway.pinata.cloud//ipfs/QmbshLNR1cieBvnsTymNznndUKwFkR24QKYCfeEzcZSyEQ",
+
+ 
+ 
+ 
+ mumbai erc721
+ 0x333A9058ADe899C88D2987Eb7291B490119c8DA9
+ https://explorer-mumbai.maticvigil.com/address/0x333A9058ADe899C88D2987Eb7291B490119c8DA9/transactions
+ https://cloudflare-ipfs.com/ipfs/QmVeGUfb1ow1eHmA1BG64ERSCKKqVmaP2TxqmdMzEHrStR
+ 
+ 
+ mumbai erc721
+ 0xA6c17bb24bE023f4F444685FeFfA5D8a7d82bc5B
+ 
+ 
+ avalance erc721
+ 
+ 0x45D794FFCBe134E2BAf81126373A7DaA950aF69c
+  https://cchain.explorer.avax.network/address/0x45D794FFCBe134E2BAf81126373A7DaA950aF69c/transactions
+  
+  
+  
+  deployed door: 0xcEd70b033c7D7a3a3Cae3751F3497fC32E16E8BB  (koios deploy) (heeft zelf ook 1 token)
+  
+  https://cchain.explorer.avax.network/tokens/0x45D794FFCBe134E2BAf81126373A7DaA950aF69c/inventory
+  
+  plaatje aanvankelijk: ipfs://QmZnvGUvsP5KaRVmtNAoUNfNeNSDzxZvq1Xpf4h1FUy2uD
+  == update url to:
+  https://cloudflare-ipfs.com/ipfs/QmZ13ubNUNmZw9KtY1sSvxsPZxjPFcEbm9dDb6o7EkqZ6D
+  
+  
+  
+  
+  xdai chain
+  0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB
+  
+  https://cloudflare-ipfs.com/ipfs/QmQMJDRJ48Me8y52TxUDCwWNNAxLCna8sPE6VzFxFhF52v
+  https://cloudflare-ipfs.com/ipfs/Qmb2BaXdnpZkdb8te94DoUPXcwRPGLuXb5d7nodySTtHyq
+  
+  
+  Rinkeby 0x14AfcB62AC5b2BcB7329968e51c0F9571eB4c84C
+  https://testnets.opensea.io/assets/0x14AfcB62AC5b2BcB7329968e51c0F9571eB4c84C/0
+  https://cloudflare-ipfs.com/ipfs/QmefPhP8WgnYSLYJemtY2nuAuFQsXAUWPCyjtXmKG7mBYP
+  https://cloudflare-ipfs.com/ipfs/QmcoGW87Ni1cbrXvrrdCYoB9F73VFrd8VbQ7dYvGNs8x7L
+  https://blockscout.com/xdai/mainnet/tokens/0xD34C0F8eE6E203eB69551892aDF9980d522CDDaB/inventory
+  
+    
+  op xdai deployed door: 0xcEd70b033c7D7a3a3Cae3751F3497fC32E16E8BB  (koios deploy) (heeft zelf ook 1 token)
+  
+  xdai:   0x7F380c4af54eCD3350F159090e7855a0cDEB85Af
+  https://blockscout.com/xdai/mainnet/tokens/0x7F380c4af54eCD3350F159090e7855a0cDEB85Af/inventory
+  
+  
+  presenter:
+    xdai chain
+  https://cloudflare-ipfs.com/ipfs/QmYMuZ6UAcb4WK35v1FgLk6vRMctjUAuhAqajjFr7RXZi7
+  
+  0x4Ee9b0Ad41067623BD86c634b29e387E8E66651D
+  https://blockscout.com/xdai/mainnet/tokens/0x4Ee9b0Ad41067623BD86c634b29e387E8E66651D/inventory
+  
+  
+  
+  
+  op rinkeby
+  0x58062F890867d0D5Bb263B55705339BE4d043eE0
+  https://testnets.opensea.io/assets/0x58062F890867d0D5Bb263B55705339BE4d043eE0/0
+  
+  mintrechten voor ["0xe88cAc4e10C4D316E0d52B82dd54f26ade3f0Bb2", 1000, 1, "Corwin"],
+  
+  
+  
+  
+  
