@@ -6,12 +6,12 @@
 
 
 <script type="module">
-// https://gpersoon.com/koios/lib/lib/checkipfs.html
+// https://koiosonline.github.io/lib/lib/checkipfs.html
 console.log("Start");
 import {GetJson,GetJsonIPFS,FetchIPFS,GetImageIPFS,setElementVal,sleep,FetchIPFSTxt,FetchIPFSUint8Array} from '../lib/koiosf_util.mjs';
 
 async function init() {
-	var courseinfo=await GetJson("https://gpersoon.com/koios/lib/viewer_figma/courseinfo.json")
+	var courseinfo=await GetJson("https://koiosonline.github.io/lib/lib/viewer_figma/courseinfo.json")
 	await recurse("courseinfo",courseinfo,"");
 	log("Done");
 }
