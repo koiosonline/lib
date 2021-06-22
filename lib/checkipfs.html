@@ -20,8 +20,8 @@ var seenbefore=[];
 
 var counter=0;
 async function recurse(thisid,obj,prefix) {
-await sleep(50); // don't overload chrome
-	log(`${prefix} Analyzing: ${thisid} ${typeof(obj)} ${JSON.stringify(obj)}`);
+await sleep(10); // don't overload chrome
+	//log(`${prefix} Analyzing: ${thisid} ${typeof(obj)} ${JSON.stringify(obj)}`);
 	if (!obj) return;
 	switch (typeof(obj)) {
 		case "object":
@@ -52,13 +52,16 @@ await sleep(50); // don't overload chrome
 
 async function CheckChild(obj,prefix) {
 
+
+obj = obj.replace("https://ipfs.io/ipfs/", "");
+
 if (seenbefore[obj]) return
 seenbefore[obj]=true;
 
 //await sleep(300); // don't overload chrome
 	counter++;
 	setElementVal("loaded",counter)
-    console.log(`Looking for : ${obj}`)
+    log(`${obj}`)
  //   var resultarray=await FetchIPFSUint8Array(obj)
   //  console.log(resultarray);    
    // return;
