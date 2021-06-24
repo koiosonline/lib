@@ -20,7 +20,7 @@ var seenbefore=[];
 
 var counter=0;
 async function recurse(thisid,obj,prefix) {
-await sleep(20); // don't overload chrome
+await sleep(50); // don't overload chrome
 	//log(`${prefix} Analyzing: ${thisid} ${typeof(obj)} ${JSON.stringify(obj)}`);
 	if (!obj) return;
 	switch (typeof(obj)) {
