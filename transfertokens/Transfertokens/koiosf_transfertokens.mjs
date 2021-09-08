@@ -73,6 +73,10 @@ async function AddElementsToList() {
 }
 
 async function ShowAddresses(nameslist,addresses,tokenamount) {
+    console.log("names: ", nameslist.length, "adds: ", addresses.length, "tokens: ", tokenamount.length)
+    console.log("names: ", nameslist)
+    console.log("adds: ", addresses)
+    console.log("tokens: ", tokenamount)
     if((nameslist.length == addresses.length) && (tokenamount.length == nameslist.length)) {    
         for (var i=0;i<addresses.length;i++) {
             if ((tokenamount[i] != 0) && 
