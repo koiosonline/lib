@@ -397,7 +397,9 @@ function SetupEditField(key,id,loc1,loc2) {
  
 async function SetupFields(filename,selectlist) {    
     selectlist.EmptyList()
-    var jobinfo=await GetChoiceItems(`https://gpersoon.com/koios/lib/sync/${filename}.json`);
+    //var jobinfo=await GetChoiceItems(`https://gpersoon.com/koios/lib/sync/${filename}.json`);
+    var jobinfo=await GetChoiceItems(`https://koiosonline.github.io/lib/sync/${filename}.json`);
+	
     console.log(jobinfo);
     
     for (var i in jobinfo) {        
