@@ -445,7 +445,8 @@ async function SetupOrbitdb() {
             //await loadScriptAsync("https://gpersoon.com/koios/lib/lib/ipfs0.50.2min.js"),     // https://unpkg.com/ipfs@0.50.2/dist/index.min.js   
 	    await loadScriptAsync("https://koiosonline.github.io/lib/lib/ipfs0.50.2min.js"),
             //await loadScriptAsync("https://gpersoon.com/koios/lib/lib/orbitdb0.24.1.min.js"); // https://www.unpkg.com/orbit-db@0.24.1/dist/orbitdb.min.js
-            await loadScriptAsync("https://gpersoon.com/koios/lib/lib/orbitdb26.min.js")    // clone from github & npm run build:dist     
+            //await loadScriptAsync("https://gpersoon.com/koios/lib/lib/orbitdb26.min.js")    // clone from github & npm run build:dist     
+		await loadScriptAsync("https://koiosonline.github.io/lib/lib/orbitdb26.min.js")    // clone from github & npm run build:dist     
         ])
     console.log('libs loaded');
     Peers()
